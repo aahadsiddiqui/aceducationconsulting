@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #0b1c2c;
+  --snow: #f5f7f8;
+  --mist: #e8eef2;
+  --muted: #4a5c6a;
+  --pine: #1f6f5b;
+  --gold: #c4a35a;
+  --line: #d5dee5;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+}
+
+@theme inline {
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --color-ink: var(--ink);
+  --color-snow: var(--snow);
+  --color-mist: var(--mist);
+  --color-pine: var(--pine);
+  --color-gold: var(--gold);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slow-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.06);
+  }
+}
+
+@utility animate-fade-in {
+  animation: fade-in 0.35s ease-out both;
+}
+
+@utility animate-rise {
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@utility animate-rise-delay {
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
+}
+
+@utility animate-rise-delay-2 {
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.24s both;
+}
+
+@utility animate-slow-zoom {
+  animation: slow-zoom 22s ease-out forwards;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--snow);
+  color: var(--ink);
+  min-height: 100dvh;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
