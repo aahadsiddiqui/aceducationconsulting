@@ -1,4 +1,4 @@
-# Ace Education Consulting
+# AC Education Consulting
 
 Education consulting website for Canadian college diploma and certificate pathways—with a province → program course directory.
 

@@ -33,17 +33,17 @@ export default function CourseDirectorySelector() {
   return (
     <section
       id="directory"
-      className="border-y border-[color:var(--line)] bg-[color:var(--snow)]"
+      className="border-y border-[color:var(--line)] bg-[color:var(--bg)]"
       aria-labelledby="course-directory-heading"
     >
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[color:var(--pine)]">
+          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-white/50">
             Course directory
           </p>
           <h2
             id="course-directory-heading"
-            className="mt-3 font-[family-name:var(--font-display)] text-3xl text-[color:var(--ink)] sm:text-4xl"
+            className="mt-3 font-[family-name:var(--font-display)] text-3xl text-white sm:text-4xl"
           >
             Compare programs by province
           </h2>
@@ -58,7 +58,7 @@ export default function CourseDirectorySelector() {
             <div className="flex flex-col gap-1.5 text-left">
               <label
                 htmlFor={provinceSelectId}
-                className="text-sm font-medium text-[color:var(--ink)]"
+                className="text-sm font-medium text-white"
               >
                 Province
               </label>
@@ -66,10 +66,9 @@ export default function CourseDirectorySelector() {
                 id={provinceSelectId}
                 value={provinceId}
                 onChange={(e) => handleProvinceChange(e.target.value)}
-                className="w-full appearance-none rounded-lg border border-[color:var(--line)] bg-white px-3.5 py-2.5 text-[color:var(--ink)] shadow-sm transition
-                  hover:border-[color:var(--pine)]/40
-                  focus:outline-none focus:ring-2 focus:ring-[color:var(--pine)]/35 focus:border-[color:var(--pine)]
-                  cursor-pointer"
+                className="w-full cursor-pointer appearance-none rounded-lg border border-[color:var(--line)] bg-[color:var(--bg-elevated)] px-3.5 py-2.5 text-white shadow-sm transition
+                  hover:border-white/30
+                  focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/25"
               >
                 <option value="">Select a province…</option>
                 {PROVINCES.map((province) => (
@@ -87,7 +86,7 @@ export default function CourseDirectorySelector() {
               >
                 <label
                   htmlFor={programSelectId}
-                  className="text-sm font-medium text-[color:var(--ink)]"
+                  className="text-sm font-medium text-white"
                 >
                   Program
                 </label>
@@ -95,10 +94,9 @@ export default function CourseDirectorySelector() {
                   id={programSelectId}
                   value={programId}
                   onChange={(e) => handleProgramChange(e.target.value)}
-                  className="w-full appearance-none rounded-lg border border-[color:var(--line)] bg-white px-3.5 py-2.5 text-[color:var(--ink)] shadow-sm transition
-                    hover:border-[color:var(--pine)]/40
-                    focus:outline-none focus:ring-2 focus:ring-[color:var(--pine)]/35 focus:border-[color:var(--pine)]
-                    cursor-pointer"
+                  className="w-full cursor-pointer appearance-none rounded-lg border border-[color:var(--line)] bg-[color:var(--bg-elevated)] px-3.5 py-2.5 text-white shadow-sm transition
+                    hover:border-white/30
+                    focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/25"
                 >
                   <option value="">Select a program…</option>
                   {PROGRAMS.map((program) => (
@@ -114,15 +112,15 @@ export default function CourseDirectorySelector() {
           {showDetails && course && (
             <article
               key={`${provinceId}-${programId}`}
-              className="mt-8 rounded-xl border border-[color:var(--line)] bg-white p-5 text-left shadow-sm sm:p-7 animate-fade-in"
+              className="mt-8 rounded-xl border border-[color:var(--line)] bg-[color:var(--bg-elevated)] p-5 text-left sm:p-7 animate-fade-in"
               aria-live="polite"
             >
-              <h3 className="text-xl font-semibold leading-snug text-[color:var(--ink)] sm:text-2xl">
+              <h3 className="text-xl font-semibold leading-snug text-white sm:text-2xl">
                 {course.title}
               </h3>
 
               <div className="mt-5">
-                <h4 className="text-sm font-semibold uppercase tracking-wide text-[color:var(--pine)]">
+                <h4 className="text-sm font-semibold uppercase tracking-wide text-white/50">
                   Program Description
                 </h4>
                 <p className="mt-2 text-[15px] leading-relaxed text-[color:var(--muted)] sm:text-base">
@@ -131,7 +129,7 @@ export default function CourseDirectorySelector() {
               </div>
 
               <div className="mt-6">
-                <h4 className="text-sm font-semibold uppercase tracking-wide text-[color:var(--pine)]">
+                <h4 className="text-sm font-semibold uppercase tracking-wide text-white/50">
                   Program Breakdown
                 </h4>
                 <ul className="mt-3 space-y-2.5">
@@ -141,7 +139,7 @@ export default function CourseDirectorySelector() {
                       className="flex gap-3 text-[15px] leading-relaxed text-[color:var(--muted)] sm:text-base"
                     >
                       <span
-                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--pine)]"
+                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-white"
                         aria-hidden
                       />
                       <span>{item}</span>

@@ -1,24 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  --ink: #0b1c2c;
-  --snow: #f5f7f8;
-  --mist: #e8eef2;
-  --muted: #4a5c6a;
-  --pine: #1f6f5b;
-  --gold: #c4a35a;
-  --line: #d5dee5;
+  --bg: #0a0a0a;
+  --bg-elevated: #121212;
+  --bg-soft: #171717;
+  --ink: #ffffff;
+  --muted: #a8a8a8;
+  --line: #2a2a2a;
+  --accent: #e8e8e8;
+  --focus: #ffffff;
   --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
 }
 
 @theme inline {
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --color-bg: var(--bg);
   --color-ink: var(--ink);
-  --color-snow: var(--snow);
-  --color-mist: var(--mist);
-  --color-pine: var(--pine);
-  --color-gold: var(--gold);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
 }
 
 @keyframes fade-in {
@@ -78,11 +78,17 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background: var(--snow);
+  background: var(--bg);
   color: var(--ink);
   min-height: 100dvh;
 }
 
 details summary::-webkit-details-marker {
   display: none;
+}
+
+/* Dark-native select option surfaces */
+select option {
+  background-color: #121212;
+  color: #ffffff;
 }

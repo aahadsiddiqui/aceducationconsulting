@@ -10,7 +10,7 @@ export default function Hero() {
     >
       <div className="absolute inset-0">
         <Image
-          src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=2400&q=80"
+          src="/images/consulting-session.jpg"
           alt=""
           fill
           priority
@@ -18,11 +18,11 @@ export default function Hero() {
           className="object-cover object-center animate-slow-zoom"
         />
         <div
-          className="absolute inset-0 bg-gradient-to-r from-[color:var(--ink)]/88 via-[color:var(--ink)]/70 to-[color:var(--ink)]/35"
+          className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/75 to-black/45"
           aria-hidden
         />
         <div
-          className="absolute inset-0 bg-gradient-to-t from-[color:var(--ink)]/50 via-transparent to-[color:var(--ink)]/20"
+          className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30"
           aria-hidden
         />
       </div>
@@ -41,13 +41,13 @@ export default function Hero() {
         <div className="mt-8 flex flex-wrap gap-3 animate-rise-delay-2">
           <a
             href="#directory"
-            className="rounded-md bg-white px-5 py-3 text-sm font-semibold text-[color:var(--ink)] transition hover:bg-[color:var(--mist)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--ink)]"
+            className="rounded-md bg-white px-5 py-3 text-sm font-semibold text-black transition hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
           >
             Explore course directory
           </a>
           <a
             href="#contact"
-            className="rounded-md border border-white/40 bg-white/5 px-5 py-3 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--ink)]"
+            className="rounded-md border border-white/40 bg-white/5 px-5 py-3 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
           >
             Talk to an advisor
           </a>

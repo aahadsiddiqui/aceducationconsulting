@@ -1,5 +1,5 @@
 export const site = {
-  name: "Ace Education Consulting",
+  name: "AC Education Consulting",
   tagline: "Your pathway to Canadian college success",
   email: "agnescamalla@aceductationconsulting.com",
   phone: "416-809-1298",
@@ -96,7 +96,7 @@ export const whyCanada = [
 export const testimonials = [
   {
     quote:
-      "Ace Education helped me choose a Personal Support Worker pathway in Ontario that matched my timeline and clinical goals. The application felt organized from day one.",
+      "AC Education helped me choose a Personal Support Worker pathway in Ontario that matched my timeline and clinical goals. The application felt organized from day one.",
     name: "Amara O.",
     detail: "PSW Certificate · Ontario",
   },
@@ -108,7 +108,7 @@ export const testimonials = [
   },
   {
     quote:
-      "As a parent, I needed clarity on costs, housing, and study permits. Ace Education kept us informed at every stage without the jargon.",
+      "As a parent, I needed clarity on costs, housing, and study permits. AC Education kept us informed at every stage without the jargon.",
     name: "Priya S.",
     detail: "Sponsor · Early Childhood Education",
   },
@@ -133,7 +133,7 @@ export const faqs = [
   {
     question: "Which programs do you advise on?",
     answer:
-      "Ace Education Consulting focuses on the career-oriented diploma and certificate programs listed in our directory—health, business, technology, community services, dental support, and justice foundations.",
+      "AC Education Consulting focuses on the career-oriented diploma and certificate programs listed in our directory—health, business, technology, community services, dental support, and justice foundations.",
   },
   {
     question: "How long does the process usually take?",

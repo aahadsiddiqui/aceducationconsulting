@@ -15,7 +15,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Ace Education Consulting | Canadian College Pathways",
+  title: "AC Education Consulting | Canadian College Pathways",
   description:
     "Education consulting for Canadian college diplomas and certificates—program matching by province, applications, study permits, and arrival support.",
 };

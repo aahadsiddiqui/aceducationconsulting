@@ -21,22 +21,20 @@ export default function SiteHeader() {
     };
   }, [open]);
 
-  const onLight = scrolled || open;
+  const solid = scrolled || open;
 
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        onLight
-          ? "bg-[color:var(--snow)]/95 backdrop-blur-md border-b border-[color:var(--line)] shadow-sm"
+        solid
+          ? "bg-[color:var(--bg)]/95 backdrop-blur-md border-b border-[color:var(--line)]"
           : "bg-transparent"
       }`}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:h-[4.25rem] sm:px-6 lg:px-8">
         <a
           href="#top"
-          className={`font-[family-name:var(--font-display)] text-lg tracking-tight sm:text-xl transition-colors ${
-            onLight ? "text-[color:var(--ink)]" : "text-white"
-          }`}
+          className="font-[family-name:var(--font-display)] text-lg tracking-tight text-white sm:text-xl"
         >
           {site.name}
         </a>
@@ -46,22 +44,14 @@ export default function SiteHeader() {
             <a
               key={link.href}
               href={link.href}
-              className={`text-sm font-medium transition rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
-                onLight
-                  ? "text-[color:var(--muted)] hover:text-[color:var(--ink)] focus-visible:ring-[color:var(--pine)]/40"
-                  : "text-white/85 hover:text-white focus-visible:ring-white/50 focus-visible:ring-offset-[color:var(--ink)]"
-              }`}
+              className="rounded-sm text-sm font-medium text-white/80 transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--bg)]"
             >
               {link.label}
             </a>
           ))}
           <a
             href="#contact"
-            className={`rounded-md px-3.5 py-2 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
-              onLight
-                ? "bg-[color:var(--ink)] text-white hover:bg-[color:var(--pine)] focus-visible:ring-[color:var(--pine)]/50"
-                : "bg-white text-[color:var(--ink)] hover:bg-white/90 focus-visible:ring-white/60 focus-visible:ring-offset-[color:var(--ink)]"
-            }`}
+            className="rounded-md bg-white px-3.5 py-2 text-sm font-medium text-black transition hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--bg)]"
           >
             Book a consult
           </a>
@@ -69,9 +59,7 @@ export default function SiteHeader() {
 
         <button
           type="button"
-          className={`inline-flex items-center justify-center rounded-md p-2 md:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--pine)]/40 transition-colors ${
-            onLight ? "text-[color:var(--ink)]" : "text-white"
-          }`}
+          className="inline-flex items-center justify-center rounded-md p-2 text-white md:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
           aria-expanded={open}
           aria-controls="mobile-nav"
           onClick={() => setOpen((v) => !v)}
@@ -94,7 +82,7 @@ export default function SiteHeader() {
       {open && (
         <div
           id="mobile-nav"
-          className="border-t border-[color:var(--line)] bg-[color:var(--snow)] px-4 py-4 md:hidden animate-fade-in"
+          className="border-t border-[color:var(--line)] bg-[color:var(--bg)] px-4 py-4 md:hidden animate-fade-in"
         >
           <nav className="flex flex-col gap-1" aria-label="Mobile">
             {navLinks.map((link) => (
@@ -102,7 +90,7 @@ export default function SiteHeader() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="rounded-md px-3 py-3 text-base font-medium text-[color:var(--ink)] hover:bg-[color:var(--mist)]"
+                className="rounded-md px-3 py-3 text-base font-medium text-white hover:bg-white/5"
               >
                 {link.label}
               </a>
@@ -110,7 +98,7 @@ export default function SiteHeader() {
             <a
               href="#contact"
               onClick={() => setOpen(false)}
-              className="mt-2 rounded-md bg-[color:var(--ink)] px-3 py-3 text-center text-base font-medium text-white"
+              className="mt-2 rounded-md bg-white px-3 py-3 text-center text-base font-medium text-black"
             >
               Book a consult
             </a>
