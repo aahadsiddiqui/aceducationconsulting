@@ -35,21 +35,22 @@ export default function Hero() {
           {site.name}
         </p>
         <p className="mt-5 max-w-xl text-lg text-white/85 sm:text-xl animate-rise-delay">
-          Guided pathways into Canadian college diplomas and certificates—matched
-          to the right province for your goals.
+          Independent guidance for Canadian citizens, permanent residents, and
+          refugees pursuing master’s programs—plus help with government student
+          funding and careers after graduation.
         </p>
         <div className="mt-8 flex flex-wrap gap-3 animate-rise-delay-2">
           <a
-            href="#directory"
+            href="#funding"
             className="rounded-md bg-white px-5 py-3 text-sm font-semibold text-black transition hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
           >
-            Explore course directory
+            Explore funding help
           </a>
           <a
             href="#contact"
             className="rounded-md border border-white/40 bg-white/5 px-5 py-3 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
           >
-            Talk to an advisor
+            Book a consult
           </a>
         </div>
       </div>

@@ -12,7 +12,7 @@ export default function SocialProofSection() {
             id="stories-heading"
             className="font-[family-name:var(--font-display)] text-3xl text-white sm:text-4xl"
           >
-            Stories from students and sponsors
+            What clients say
           </h2>
           <ul className="mt-10 grid gap-8 lg:grid-cols-3">
             {testimonials.map((item) => (

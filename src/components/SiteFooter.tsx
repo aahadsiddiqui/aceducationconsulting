@@ -9,8 +9,11 @@ export default function SiteFooter() {
             {site.name}
           </p>
           <p className="mt-2 max-w-sm text-sm leading-relaxed text-[color:var(--muted)]">
-            {site.tagline}. Helping students navigate Canadian college diplomas
-            and certificates with clarity.
+            {site.tagline}. For Canadian citizens, permanent residents, and
+            refugees.
+          </p>
+          <p className="mt-3 max-w-sm text-xs leading-relaxed text-white/40">
+            {site.disclaimer}
           </p>
         </div>
         <nav aria-label="Footer" className="flex flex-wrap gap-x-6 gap-y-2">
@@ -27,9 +30,10 @@ export default function SiteFooter() {
       </div>
       <div className="border-t border-[color:var(--line)]">
         <p className="mx-auto max-w-6xl px-4 py-5 text-xs text-white/40 sm:px-6 lg:px-8">
-          © {new Date().getFullYear()} {site.name}. Program details are advisory
-          summaries—always confirm admissions, fees, and credential recognition
-          with the issuing college.
+          © {new Date().getFullYear()} {site.name}. Program and funding details
+          are advisory summaries—always confirm admissions, fees, and student aid
+          eligibility with the institution and the official government aid
+          office.
         </p>
       </div>
     </footer>

@@ -1,13 +1,16 @@
 export const site = {
   name: "AC Education Consulting",
-  tagline: "Your pathway to Canadian college success",
+  tagline: "Master’s programs, government funding, and career support",
   email: "agnescamalla@aceductationconsulting.com",
   phone: "416-809-1298",
-  location: "Serving students across Canada & internationally",
+  location: "Serving Canadian citizens, permanent residents, and refugees across Canada",
+  disclaimer:
+    "AC Education Consulting is an independent advisory service. We are not affiliated with, endorsed by, or representatives of any college or university.",
 };
 
 export const navLinks = [
   { href: "#services", label: "Services" },
+  { href: "#funding", label: "Funding" },
   { href: "#programs", label: "Programs" },
   { href: "#directory", label: "Directory" },
   { href: "#process", label: "Process" },
@@ -15,36 +18,67 @@ export const navLinks = [
   { href: "#contact", label: "Contact" },
 ] as const;
 
+export const whoWeServe = [
+  {
+    title: "Canadian citizens",
+    description:
+      "Domestic applicants looking for the right master’s or graduate-level program and the funding that can support it.",
+  },
+  {
+    title: "Permanent residents",
+    description:
+      "PR holders ready to advance with a master’s degree or graduate credential at a Canadian college or university.",
+  },
+  {
+    title: "Refugees & protected persons",
+    description:
+      "Eligible refugee and protected-person clients navigating program choice, student aid applications, and next-step career plans.",
+  },
+] as const;
+
 export const services = [
   {
-    title: "Program & province matching",
+    title: "Right college & university fit",
     description:
-      "We map your academic background, career goals, and budget to the right Canadian college diploma or certificate—and the province where that pathway works best.",
+      "We help you compare master’s and graduate-level options at community colleges and universities—based on your goals, background, and where you live. We are not affiliated with any institution.",
   },
   {
-    title: "Full application processing",
+    title: "Government grants & student loans",
     description:
-      "From document checklists to submission timelines, we manage college applications end-to-end so nothing critical is missed.",
+      "We guide you through OSAP in Ontario and the student assistance system in your province so you understand grants, loans, and how to apply for support you may be eligible for.",
   },
   {
-    title: "Study permit guidance",
+    title: "Application guidance",
     description:
-      "Clear advice on study permit preparation, supporting documents, and what institutions typically expect from international applicants.",
+      "We help organize transcripts, references, statements, and timelines so your applications to colleges and universities are complete and competitive.",
   },
   {
-    title: "Accommodation & arrival support",
+    title: "Career support after graduation",
     description:
-      "Help securing suitable on-campus or off-campus housing and a practical landing plan for your first weeks in Canada.",
+      "Once you successfully complete your program, we assist with career planning—résumés, role targeting, and connecting your credential to real job opportunities in Canada.",
+  },
+] as const;
+
+export const fundingHighlights = [
+  {
+    title: "OSAP (Ontario)",
+    description:
+      "For eligible students studying in Ontario, we walk through the Ontario Student Assistance Program—grants, loans, and how your course load and income can affect your award.",
   },
   {
-    title: "On-campus mentorship",
+    title: "Provincial student aid",
     description:
-      "Continued guidance after you arrive—registration questions, academic adjustment, and next-step career planning.",
+      "Outside Ontario, each province has its own student assistance system. We help you identify the right portal and documents for where you live and plan to study.",
   },
   {
-    title: "Sponsor & family advisory",
+    title: "Grants vs. loans",
     description:
-      "Transparent updates for parents and sponsors on timelines, tuition planning, and what success looks like at each stage.",
+      "We explain the difference between non-repayable grants and repayable loans so you can plan realistically before you accept an offer.",
+  },
+  {
+    title: "Eligibility clarity",
+    description:
+      "Citizenship, PR, and refugee/protected-person status can affect funding. We help you understand what typically applies—and what you should confirm with the official aid office.",
   },
 ] as const;
 
@@ -53,91 +87,73 @@ export const processSteps = [
     step: "01",
     title: "Discovery consult",
     description:
-      "Share your goals, transcripts, and preferred fields. We clarify eligibility, timelines, and realistic college options.",
+      "We learn your status (citizen, PR, or refugee/protected person), academic background, career goals, and preferred province of study.",
   },
   {
     step: "02",
-    title: "Province & program shortlist",
+    title: "Program shortlist",
     description:
-      "Using our course directory and labour-market insight, we shortlist programs across the provinces that fit you best.",
+      "We shortlist master’s and graduate-level programs at colleges and universities that fit you—without institutional affiliation or pressure toward a single school.",
   },
   {
     step: "03",
-    title: "Applications & offers",
+    title: "Funding & applications",
     description:
-      "We prepare a polished application package, track deadlines, and help you compare offers when they arrive.",
+      "We support your school applications and help you navigate OSAP or your province’s student assistance system for grants and loans.",
   },
   {
     step: "04",
-    title: "Permit, housing & launch",
+    title: "Career after graduation",
     description:
-      "Study permit support, housing options, and a pre-departure checklist so you land ready to succeed.",
-  },
-] as const;
-
-export const whyCanada = [
-  {
-    title: "Globally respected credentials",
-    description:
-      "Canadian college diplomas and certificates are recognized worldwide and built around applied, career-ready learning.",
-  },
-  {
-    title: "Work-integrated pathways",
-    description:
-      "Many programs include practicums, co-ops, or clinics—experience employers actually look for after graduation.",
-  },
-  {
-    title: "Provincial choice & lifestyle",
-    description:
-      "From Ontario’s scale to Atlantic affordability and B.C.’s Pacific economy, province choice shapes cost, community, and opportunity.",
+      "After you successfully pass your course, we help you plan the next step—job search strategy and career positioning with your new credential.",
   },
 ] as const;
 
 export const testimonials = [
   {
     quote:
-      "AC Education helped me choose a Personal Support Worker pathway in Ontario that matched my timeline and clinical goals. The application felt organized from day one.",
+      "As a permanent resident, I needed a master’s option I could fund through OSAP. AC Education helped me compare programs and submit a clearer aid application.",
     name: "Amara O.",
-    detail: "PSW Certificate · Ontario",
+    detail: "Permanent resident · Ontario",
   },
   {
     quote:
-      "I was torn between IT programs in Alberta and B.C. Their directory breakdown made the differences clear, and I accepted an offer with confidence.",
+      "They explained Alberta Student Aid in plain language and helped me choose a graduate program that matched the career I wanted after finishing.",
     name: "Daniel K.",
-    detail: "Information Technology · Alberta",
+    detail: "Canadian citizen · Alberta",
   },
   {
     quote:
-      "As a parent, I needed clarity on costs, housing, and study permits. AC Education kept us informed at every stage without the jargon.",
+      "I appreciated that they were honest about not being part of any school—and still guided me on funding and what to do after I graduated.",
     name: "Priya S.",
-    detail: "Sponsor · Early Childhood Education",
+    detail: "Protected person · British Columbia",
   },
 ] as const;
 
 export const faqs = [
   {
-    question: "Do you only work with students outside Canada?",
+    question: "Who do you work with?",
     answer:
-      "Most of our clients are international applicants, but we also support newcomers and domestic students comparing college diploma and certificate options across provinces.",
+      "We work with Canadian citizens, permanent residents, and refugees/protected persons. We do not provide overseas recruitment, study-permit, or visa assistance.",
   },
   {
-    question: "Can you guarantee admission or a study permit?",
+    question: "Do you only advise on master’s programs?",
     answer:
-      "No ethical consultancy can guarantee outcomes. We strengthen your applications, keep documentation complete, and prepare you thoroughly—decisions remain with colleges and immigration authorities.",
+      "Yes. We focus on master’s and graduate-level programs offered through Canadian community colleges and universities. We are not affiliated with those institutions.",
   },
   {
-    question: "How is the course directory different from a college website?",
+    question: "Can you guarantee OSAP or provincial funding?",
     answer:
-      "College sites describe one institution. Our directory compares program pathways by province, so you can see how the same field (for example Business Administration) is framed in Ontario versus Alberta or B.C.",
+      "No. Funding decisions are made by OSAP and each province’s student assistance office. We help you prepare a stronger, clearer application and understand what information those systems typically need.",
   },
   {
-    question: "Which programs do you advise on?",
+    question: "Are you part of a college or university?",
     answer:
-      "AC Education Consulting focuses on the career-oriented diploma and certificate programs listed in our directory—health, business, technology, community services, dental support, and justice foundations.",
+      "No. AC Education Consulting is independent. We help you choose among institutions; we do not represent or receive placement direction from any school.",
   },
   {
-    question: "How long does the process usually take?",
+    question: "What happens after I finish my program?",
     answer:
-      "Plan 4–8 months before your intended start for applications, offers, and study permit processing. Some intakes move faster; we build a timeline around your target semester.",
+      "We can assist with career planning after you successfully complete your course—clarifying target roles, strengthening application materials, and aligning your credential with the Canadian job market.",
   },
 ] as const;

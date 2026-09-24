@@ -1,6 +1,7 @@
 import SiteHeader from "@/components/SiteHeader";
 import Hero from "@/components/Hero";
 import ServicesSection from "@/components/ServicesSection";
+import FundingSection from "@/components/FundingSection";
 import ProgramsSection from "@/components/ProgramsSection";
 import CourseDirectorySelector from "@/components/CourseDirectorySelector";
 import ProcessSection from "@/components/ProcessSection";
@@ -15,6 +16,7 @@ export default function HomePage() {
       <main>
         <Hero />
         <ServicesSection />
+        <FundingSection />
         <ProgramsSection />
         <CourseDirectorySelector />
         <ProcessSection />

@@ -1,11 +1,6 @@
 /**
- * Course Directory — typed schema + province-aware content for all
- * 10 provinces × 28 programs.
- *
- * Duplicate handling (from the original 31-line list):
- * - Personal Support Worker ×3 → consolidated
- * - Pharmacy Assistant ×2 → consolidated
- * - Near-duplicates kept as distinct credentials where titles differ
+ * Graduate / master’s program directory by province.
+ * AC Education Consulting is not affiliated with any college or university.
  */
 
 export type ProvinceId =
@@ -21,42 +16,30 @@ export type ProvinceId =
   | "saskatchewan";
 
 export type ProgramId =
-  | "business-administration"
-  | "cardiology-technology"
-  | "child-youth-care-addiction-support"
-  | "information-technology"
-  | "law-enforcement-police-foundations"
-  | "medical-office-administration"
-  | "massage-therapy"
-  | "orthopaedic-technician"
-  | "personal-support-worker"
-  | "pharmacy-technician"
-  | "early-childhood-assistant-diploma"
-  | "early-childhood-education"
-  | "health-information-management"
-  | "dental-assistant-intra-oral"
-  | "medical-esthetician"
-  | "medical-laboratory-technician"
-  | "medical-office-assistant"
-  | "paralegal"
-  | "pharmacy-assistant"
-  | "supply-chain-logistics"
-  | "community-service-worker"
-  | "dental-administrator"
-  | "dental-assisting"
-  | "early-childhood-assistant"
-  | "fitness-and-health"
-  | "food-service-worker"
-  | "medical-laboratory-assistant-technician"
-  | "medical-office-administrator";
+  | "mba"
+  | "master-of-education"
+  | "master-of-social-work"
+  | "master-of-public-health"
+  | "master-of-nursing"
+  | "master-of-computer-science"
+  | "master-of-engineering"
+  | "master-of-public-administration"
+  | "master-of-arts"
+  | "master-of-science"
+  | "master-of-finance"
+  | "graduate-certificate-business"
+  | "graduate-certificate-health"
+  | "graduate-certificate-it"
+  | "master-of-counselling"
+  | "master-of-data-science";
 
 export type ProgramCategory =
-  | "Business & Administration"
-  | "Health & Allied Care"
-  | "Community & Human Services"
-  | "Technology"
-  | "Justice & Public Safety"
-  | "Dental & Clinical Support";
+  | "Business & Management"
+  | "Health & Social Care"
+  | "Education & Counselling"
+  | "Technology & Engineering"
+  | "Public Policy & Arts"
+  | "College Graduate Certificates";
 
 export interface CourseDetails {
   title: string;
@@ -68,6 +51,7 @@ export interface Province {
   id: ProvinceId;
   name: string;
   shortName: string;
+  studentAid: string;
   highlight: string;
 }
 
@@ -81,17 +65,16 @@ export interface Program {
 }
 
 interface ProvinceContext {
-  regulator: string;
+  studentAid: string;
   labourFocus: string;
-  campusNote: string;
-  credentialFraming: string;
+  institutionNote: string;
 }
 
 interface ProgramTemplate {
   focus: string;
   outcomes: string;
   modules: [string, string, string, string];
-  clinicalOrCapstone: string;
+  capstone: string;
 }
 
 export const PROVINCES: readonly Province[] = [
@@ -99,700 +82,434 @@ export const PROVINCES: readonly Province[] = [
     id: "alberta",
     name: "Alberta",
     shortName: "AB",
-    highlight: "Energy, health care, and growing tech corridors in Calgary and Edmonton.",
+    studentAid: "Alberta Student Aid",
+    highlight: "Graduate study options with Alberta Student Aid for eligible domestic students.",
   },
   {
     id: "british-columbia",
     name: "British Columbia",
     shortName: "BC",
-    highlight: "Pacific gateway for trade, tourism, health care, and technology.",
+    studentAid: "StudentAid BC",
+    highlight: "University and college graduate programs with StudentAid BC support where eligible.",
   },
   {
     id: "manitoba",
     name: "Manitoba",
     shortName: "MB",
-    highlight: "Affordable living with strong demand in health and community services.",
+    studentAid: "Manitoba Student Aid",
+    highlight: "Master’s and graduate options with Manitoba Student Aid for qualifying students.",
   },
   {
     id: "new-brunswick",
     name: "New Brunswick",
     shortName: "NB",
-    highlight: "Bilingual opportunities and welcoming Atlantic college pathways.",
+    studentAid: "New Brunswick Student Financial Services",
+    highlight: "Graduate credentials with provincial student financial services guidance.",
   },
   {
     id: "newfoundland-and-labrador",
     name: "Newfoundland and Labrador",
     shortName: "NL",
-    highlight: "Close-knit campuses with health and trades-aligned career routes.",
+    studentAid: "StudentAid NL",
+    highlight: "University and college graduate study with StudentAid NL for eligible applicants.",
   },
   {
     id: "nova-scotia",
     name: "Nova Scotia",
     shortName: "NS",
-    highlight: "Halifax hub for education, ocean industries, and health programs.",
+    studentAid: "Nova Scotia Student Assistance",
+    highlight: "Master’s programs with Nova Scotia Student Assistance for domestic learners.",
   },
   {
     id: "ontario",
     name: "Ontario",
     shortName: "ON",
-    highlight: "Canada’s largest college system and widest program selection.",
+    studentAid: "OSAP (Ontario Student Assistance Program)",
+    highlight: "Broad master’s and graduate-certificate options; OSAP for eligible Ontarians.",
   },
   {
     id: "prince-edward-island",
     name: "Prince Edward Island",
     shortName: "PE",
-    highlight: "Small-campus experience with community-focused career training.",
+    studentAid: "PEI Student Financial Services",
+    highlight: "Graduate study with PEI Student Financial Services for qualifying students.",
   },
   {
     id: "quebec",
     name: "Quebec",
     shortName: "QC",
-    highlight: "Distinct CEGEP/college pathways and bilingual career advantage.",
+    studentAid: "Aide financière aux études (AFE)",
+    highlight: "University master’s programs with Quebec’s AFE system for eligible students.",
   },
   {
     id: "saskatchewan",
     name: "Saskatchewan",
     shortName: "SK",
-    highlight: "Steady demand in health care, agriculture support, and administration.",
+    studentAid: "Saskatchewan Student Aid",
+    highlight: "Graduate programs with Saskatchewan Student Aid for eligible domestic students.",
   },
 ] as const;
 
 const PROVINCE_CONTEXT: Record<ProvinceId, ProvinceContext> = {
   alberta: {
-    regulator: "Alberta Advanced Education program standards",
-    labourFocus:
-      "Calgary–Edmonton employers in energy services, continuing care, and mid-size enterprise",
-    campusNote: "urban campuses with strong industry work-integrated learning options",
-    credentialFraming: "Alberta college diploma or certificate pathway",
+    studentAid: "Alberta Student Aid",
+    labourFocus: "energy services, health systems, public sector, and growing tech employers",
+    institutionNote: "Alberta universities and colleges offering master’s or graduate-level study",
   },
   "british-columbia": {
-    regulator: "B.C. Ministry of Post-Secondary Education and Future Skills expectations",
-    labourFocus:
-      "Lower Mainland and Island employers in health, tourism-adjacent services, and tech support",
-    campusNote: "metro and regional campuses with practice-education placements",
-    credentialFraming: "B.C. college diploma or certificate pathway",
+    studentAid: "StudentAid BC",
+    labourFocus: "health, education, technology, and public administration employers",
+    institutionNote: "B.C. universities and colleges with graduate and post-degree options",
   },
   manitoba: {
-    regulator: "Manitoba advanced education college program frameworks",
-    labourFocus:
-      "Winnipeg and regional employers seeking health support, admin, and community roles",
-    campusNote: "accessible campuses with community placement networks",
-    credentialFraming: "Manitoba college diploma or certificate pathway",
+    studentAid: "Manitoba Student Aid",
+    labourFocus: "health care, community services, education, and government roles",
+    institutionNote: "Manitoba universities and colleges with graduate-level offerings",
   },
   "new-brunswick": {
-    regulator: "New Brunswick post-secondary program quality standards",
-    labourFocus:
-      "bilingual and regional employers across health, administration, and public services",
-    campusNote: "intimate class sizes and Atlantic employer connections",
-    credentialFraming: "New Brunswick college diploma or certificate pathway",
+    studentAid: "New Brunswick Student Financial Services",
+    labourFocus: "public services, health, education, and regional professional employers",
+    institutionNote: "New Brunswick universities and colleges with graduate credentials",
   },
   "newfoundland-and-labrador": {
-    regulator: "Newfoundland and Labrador college program guidelines",
-    labourFocus:
-      "provincial health authorities, community agencies, and administrative employers",
-    campusNote: "supportive campus communities with applied practicum routes",
-    credentialFraming: "Newfoundland and Labrador college diploma or certificate pathway",
+    studentAid: "StudentAid NL",
+    labourFocus: "health authorities, education, public service, and applied research roles",
+    institutionNote: "Newfoundland and Labrador universities and colleges with graduate study",
   },
   "nova-scotia": {
-    regulator: "Nova Scotia community college program standards",
-    labourFocus:
-      "Halifax and regional demand in health care, business support, and IT services",
-    campusNote: "practice-ready labs and Atlantic career services support",
-    credentialFraming: "Nova Scotia college diploma or certificate pathway",
+    studentAid: "Nova Scotia Student Assistance",
+    labourFocus: "health, education, ocean-adjacent industries, and public sector employers",
+    institutionNote: "Nova Scotia universities and colleges offering master’s or graduate study",
   },
   ontario: {
-    regulator: "Ontario Ministry of Colleges and Universities program standards",
-    labourFocus:
-      "GTA and regional employers across health systems, business, and public services",
-    campusNote: "one of Canada’s broadest college networks and co-op options",
-    credentialFraming: "Ontario College Diploma or Certificate pathway",
+    studentAid: "OSAP",
+    labourFocus: "GTA and regional employers across health, business, tech, and public services",
+    institutionNote: "Ontario universities and colleges with master’s and graduate certificates",
   },
   "prince-edward-island": {
-    regulator: "Prince Edward Island post-secondary training frameworks",
-    labourFocus:
-      "community health, hospitality-adjacent services, and small-business administration",
-    campusNote: "small cohorts and hands-on provincial placement partners",
-    credentialFraming: "P.E.I. college diploma or certificate pathway",
+    studentAid: "PEI Student Financial Services",
+    labourFocus: "health, education, public service, and community professional roles",
+    institutionNote: "P.E.I. universities and colleges with graduate-level programs",
   },
   quebec: {
-    regulator: "Quebec college (CEGEP/college) program structures and language context",
-    labourFocus:
-      "Montreal and regional employers valuing bilingual capability in care and admin roles",
-    campusNote: "college pathways that may include French-language workplace readiness",
-    credentialFraming: "Quebec college diploma or attestation pathway",
+    studentAid: "Aide financière aux études (AFE)",
+    labourFocus: "Montreal and regional employers in health, education, tech, and administration",
+    institutionNote: "Quebec universities (and eligible college graduate options) for master’s study",
   },
   saskatchewan: {
-    regulator: "Saskatchewan post-secondary college program expectations",
-    labourFocus:
-      "provincial health, agriculture-support administration, and community service employers",
-    campusNote: "applied learning with prairie employer partnerships",
-    credentialFraming: "Saskatchewan college diploma or certificate pathway",
+    studentAid: "Saskatchewan Student Aid",
+    labourFocus: "health, education, agriculture-support professions, and public sector roles",
+    institutionNote: "Saskatchewan universities and colleges with graduate credentials",
   },
 };
 
 const PROGRAM_TEMPLATES: Record<ProgramId, ProgramTemplate> = {
-  "business-administration": {
-    focus: "supervisory and administrative capability across public and private organizations",
-    outcomes:
-      "operations coordination, foundational accounting literacy, marketing basics, and people leadership",
+  mba: {
+    focus: "advanced business leadership, strategy, and organizational decision-making",
+    outcomes: "management analysis, finance literacy, marketing strategy, and leadership practice",
     modules: [
-      "Business fundamentals, communications, and introductory accounting",
-      "Marketing, human resources, and digital productivity tools",
-      "Operations, Canadian business law overview, and entrepreneurship",
-      "Finance essentials and organizational decision-making",
+      "Strategy, economics, and managerial accounting",
+      "Marketing, operations, and organizational behaviour",
+      "Finance, analytics, and digital transformation",
+      "Leadership, ethics, and Canadian business context",
     ],
-    clinicalOrCapstone: "Applied business capstone or employer-linked project",
+    capstone: "Applied consulting project or integrative strategy capstone",
   },
-  "cardiology-technology": {
-    focus: "cardiac diagnostic support skills used in hospital and clinic settings",
-    outcomes:
-      "ECG acquisition, stress testing support, Holter monitoring workflows, and patient-centred communication",
+  "master-of-education": {
+    focus: "advanced teaching, learning design, and educational leadership",
+    outcomes: "curriculum inquiry, inclusive practice, assessment design, and research literacy",
     modules: [
-      "Cardiovascular anatomy, physiology, and medical terminology",
-      "ECG theory, acquisition technique, and rhythm recognition basics",
-      "Ambulatory monitoring, stress testing support, and safety protocols",
-      "Clinical documentation, ethics, and interprofessional practice",
+      "Learning theory and educational research methods",
+      "Curriculum design and inclusive pedagogy",
+      "Leadership, policy, and school/community contexts",
+      "Electives in literacy, technology, or adult learning",
     ],
-    clinicalOrCapstone: "Supervised clinical practicum in approved cardiac care settings",
+    capstone: "Major research paper, thesis, or practitioner inquiry project",
   },
-  "child-youth-care-addiction-support": {
-    focus: "supporting children, youth, and families facing behavioural and addiction challenges",
-    outcomes:
-      "crisis-aware communication, case documentation, community referral pathways, and trauma-informed care basics",
+  "master-of-social-work": {
+    focus: "advanced social work practice with individuals, families, and communities",
+    outcomes: "clinical or community practice skills, ethics, policy analysis, and research",
     modules: [
-      "Child and youth development, ethics, and professional boundaries",
-      "Addiction foundations, harm reduction, and motivational approaches",
-      "Family systems, mental health awareness, and cultural humility",
-      "Group facilitation, documentation, and community resources",
+      "Advanced social work theory and ethics",
+      "Practice with individuals, families, and groups",
+      "Social policy, advocacy, and Indigenous perspectives awareness",
+      "Research methods for social work practice",
     ],
-    clinicalOrCapstone: "Field placement with a youth, family, or addiction support agency",
+    capstone: "Supervised field practicum and integrative seminar",
   },
-  "information-technology": {
-    focus: "hands-on IT support, networking, and systems administration foundations",
-    outcomes:
-      "help-desk readiness, OS and network troubleshooting, security hygiene, and cloud awareness",
+  "master-of-public-health": {
+    focus: "population health, prevention, and health systems improvement",
+    outcomes: "epidemiology basics, health promotion, policy analysis, and program evaluation",
     modules: [
-      "Hardware, operating systems, and customer service for IT",
-      "Networking fundamentals and TCP/IP troubleshooting",
-      "Windows/Linux administration and scripting basics",
-      "Cybersecurity awareness, cloud intro, and IT service workflows",
+      "Epidemiology and biostatistics foundations",
+      "Health promotion and community assessment",
+      "Health policy, systems, and equity",
+      "Program planning and evaluation",
     ],
-    clinicalOrCapstone: "IT service desk simulation, portfolio project, or work term",
+    capstone: "Practicum or applied public health project",
   },
-  "law-enforcement-police-foundations": {
-    focus: "foundations for policing, security, and justice-system support careers",
-    outcomes:
-      "criminal justice literacy, fitness and professional conduct, investigative basics, and community policing awareness",
+  "master-of-nursing": {
+    focus: "advanced nursing practice, leadership, and evidence-informed care",
+    outcomes: "clinical leadership, quality improvement, and advanced nursing scholarship",
     modules: [
-      "Canadian criminal justice system and Charter considerations",
-      "Criminology, diversity, and conflict de-escalation",
-      "Investigation foundations, evidence handling, and report writing",
-      "Fitness, ethics, and career preparation for justice pathways",
+      "Advanced nursing practice and pathophysiology review",
+      "Leadership, quality, and patient safety",
+      "Evidence-informed practice and research methods",
+      "Population health and interprofessional collaboration",
     ],
-    clinicalOrCapstone: "Scenario labs, community engagement project, or justice placement",
+    capstone: "Clinical practicum, MRP, or thesis option",
   },
-  "medical-office-administration": {
-    focus: "front-office leadership for clinics, hospitals, and specialty practices",
-    outcomes:
-      "scheduling systems, medical billing awareness, records management, and patient flow coordination",
+  "master-of-computer-science": {
+    focus: "advanced computing, software systems, and applied research",
+    outcomes: "algorithms, systems design, AI/ML awareness, and research communication",
     modules: [
-      "Medical terminology, office communications, and professionalism",
-      "Electronic health records, scheduling, and privacy legislation basics",
-      "Billing/coding awareness, inventory, and practice management",
-      "Leadership in the medical office and quality improvement basics",
+      "Advanced algorithms and software architecture",
+      "Systems, networks, or databases depth courses",
+      "Machine learning / AI electives",
+      "Research methods and professional practice",
     ],
-    clinicalOrCapstone: "Clinic or hospital administrative practicum",
+    capstone: "Thesis or major research project",
   },
-  "massage-therapy": {
-    focus: "therapeutic massage assessment and treatment planning",
-    outcomes:
-      "manual therapy techniques, clinical assessment, documentation, and professional practice readiness",
+  "master-of-engineering": {
+    focus: "advanced engineering practice and technical leadership",
+    outcomes: "specialized technical depth, project leadership, and applied design",
     modules: [
-      "Anatomy, physiology, and pathology foundations",
-      "Assessment, treatment planning, and Swedish/therapeutic techniques",
-      "Orthopaedic and clinical massage applications",
-      "Professional practice, ethics, and business basics for therapists",
+      "Advanced engineering mathematics and methods",
+      "Discipline specialization coursework",
+      "Project management and professional practice",
+      "Technical electives aligned to industry needs",
     ],
-    clinicalOrCapstone: "Supervised student clinic hours meeting program requirements",
+    capstone: "Design project or research-based culminating experience",
   },
-  "orthopaedic-technician": {
-    focus: "cast room and orthopaedic clinic technical support",
-    outcomes:
-      "casting/splinting support, traction awareness, sterile technique, and patient education",
+  "master-of-public-administration": {
+    focus: "public sector leadership, policy analysis, and program delivery",
+    outcomes: "policy design, public finance awareness, governance, and stakeholder management",
     modules: [
-      "Musculoskeletal anatomy and orthopaedic terminology",
-      "Casting, splinting, and brace-fitting fundamentals",
-      "Wound care awareness, infection control, and clinic safety",
-      "Documentation, radiograph basics for techs, and team communication",
+      "Public policy analysis and governance",
+      "Public finance and performance management",
+      "Leadership, ethics, and intergovernmental relations",
+      "Research methods for public administration",
     ],
-    clinicalOrCapstone: "Orthopaedic clinic or hospital cast-room practicum",
+    capstone: "Policy brief, practicum, or major research paper",
   },
-  "personal-support-worker": {
-    focus: "personal care and daily living support in home, long-term care, and community settings",
-    outcomes:
-      "ADL assistance, mobility support, dementia-aware care, and family communication",
+  "master-of-arts": {
+    focus: "advanced humanities or social science inquiry",
+    outcomes: "critical analysis, research design, scholarly writing, and subject specialization",
     modules: [
-      "Role of the PSW/HCA, ethics, and client-centred care",
-      "Body systems, safety, and infection prevention",
-      "Assisting with activities of daily living and mobility",
-      "Mental health, dementia care, and palliative awareness",
+      "Disciplinary theory and historiography/methods",
+      "Research design and academic writing",
+      "Specialized seminar courses",
+      "Electives supporting thesis or MRP focus",
     ],
-    clinicalOrCapstone: "Facility and community clinical placements",
+    capstone: "Thesis or major research paper",
   },
-  "pharmacy-technician": {
-    focus: "dispensing support and pharmacy operations under pharmacist supervision",
-    outcomes:
-      "prescription processing, inventory control, compounding awareness, and regulated pharmacy workflows",
+  "master-of-science": {
+    focus: "advanced scientific research and technical specialization",
+    outcomes: "experimental or computational methods, data analysis, and scientific communication",
     modules: [
-      "Pharmacy calculations, terminology, and legislation overview",
-      "Dispensing systems, product preparation, and accuracy checks",
-      "Inventory, narcotic controls, and community vs hospital practice",
-      "Communication, ethics, and interprofessional collaboration",
+      "Advanced methods in the chosen science discipline",
+      "Statistics / research design",
+      "Specialized seminars and lab coursework",
+      "Scholarly communication and ethics",
     ],
-    clinicalOrCapstone: "Community and/or hospital pharmacy practicum",
+    capstone: "Thesis or research project with faculty supervision",
   },
-  "early-childhood-assistant-diploma": {
-    focus: "diploma-level support for licensed early learning environments",
-    outcomes:
-      "play-based learning support, observation notes, health and safety, and inclusive practice",
+  "master-of-finance": {
+    focus: "advanced corporate finance, markets, and investment analysis",
+    outcomes: "valuation, risk, portfolio theory, and financial modelling",
     modules: [
-      "Child development and play-based learning foundations",
-      "Guiding behaviour, inclusion, and family engagement",
-      "Health, nutrition, and safety in early years settings",
-      "Curriculum support, documentation, and professional practice",
+      "Corporate finance and financial reporting analysis",
+      "Investments and portfolio management",
+      "Derivatives, risk, and fixed income",
+      "Financial modelling and Canadian markets context",
     ],
-    clinicalOrCapstone: "Practicum in licensed childcare or early years programs",
+    capstone: "Applied finance project or integrative case sequence",
   },
-  "early-childhood-education": {
-    focus: "lead educator preparation for early learning and childcare settings",
-    outcomes:
-      "curriculum planning, observation and assessment, inclusive pedagogy, and regulatory awareness",
+  "graduate-certificate-business": {
+    focus: "post-degree business specialization through a college graduate certificate",
+    outcomes: "applied management skills for career advancement or pivot",
     modules: [
-      "Foundations of ECE, ethics, and child development theory",
-      "Curriculum design, literacy/numeracy through play, and outdoor learning",
-      "Inclusion, Indigenous perspectives awareness, and family partnerships",
-      "Program administration basics and professional leadership",
+      "Business fundamentals refresh for degree holders",
+      "Applied marketing or operations specialization",
+      "Workplace analytics and digital tools",
+      "Professional communication and career readiness",
     ],
-    clinicalOrCapstone: "Multiple practicum blocks in early learning centres",
+    capstone: "Industry project or work-integrated learning term",
   },
-  "health-information-management": {
-    focus: "clinical data quality, coding, and health records stewardship",
-    outcomes:
-      "classification/coding awareness, privacy compliance, data reporting, and digital HIM systems",
+  "graduate-certificate-health": {
+    focus: "post-degree health specialization at the college graduate level",
+    outcomes: "applied clinical-adjacent or health administration skills",
     modules: [
-      "Health system structure and medical terminology for HIM",
-      "Records management, privacy law, and release-of-information basics",
-      "Coding foundations and clinical documentation improvement awareness",
-      "Analytics intro, quality indicators, and digital health systems",
+      "Health systems and professional practice",
+      "Specialization coursework (clinical support or admin)",
+      "Quality, safety, and documentation standards",
+      "Interprofessional collaboration",
     ],
-    clinicalOrCapstone: "HIM department practicum or applied data project",
+    capstone: "Practicum or applied health project",
   },
-  "dental-assistant-intra-oral": {
-    focus: "chairside and intra-oral Level 1 & 2 dental assisting competencies",
-    outcomes:
-      "four-handed dentistry support, radiography awareness, infection control, and patient education",
+  "graduate-certificate-it": {
+    focus: "post-degree IT specialization through a college graduate certificate",
+    outcomes: "hands-on technical skills for cybersecurity, cloud, or development tracks",
     modules: [
-      "Dental anatomy, charting, and office protocols",
-      "Chairside assisting, materials, and sterilization",
-      "Intra-oral skills aligned to Level 1 & 2 scopes",
-      "Radiography theory/practice awareness and prevention education",
+      "Technical foundations for career changers/advancers",
+      "Specialization labs (cloud, security, or development)",
+      "IT service and project workflows",
+      "Portfolio development",
     ],
-    clinicalOrCapstone: "Dental clinic practicum with intra-oral skill demonstration",
+    capstone: "Capstone build or industry placement",
   },
-  "medical-esthetician": {
-    focus: "clinical aesthetic treatments in medical-spa and dermatology-adjacent settings",
-    outcomes:
-      "skin analysis, advanced facial protocols, device-assisted treatments awareness, and sanitation standards",
+  "master-of-counselling": {
+    focus: "professional counselling practice and therapeutic skill development",
+    outcomes: "counselling theories, ethics, assessment, and supervised practice",
     modules: [
-      "Integumentary science, contraindications, and consultation skills",
-      "Medical facial protocols and peels awareness",
-      "Laser/IPL theory overview and device safety culture",
-      "Retail ethics, documentation, and clinic operations",
+      "Counselling theories and helping relationships",
+      "Ethics, diversity, and professional identity",
+      "Assessment and intervention strategies",
+      "Group counselling and specialized populations",
     ],
-    clinicalOrCapstone: "Supervised student clinic performing medical-esthetic services",
+    capstone: "Supervised practicum hours and integrative seminar",
   },
-  "medical-laboratory-technician": {
-    focus: "specimen collection and core lab support procedures",
-    outcomes:
-      "phlebotomy, specimen handling, quality control awareness, and lab safety",
+  "master-of-data-science": {
+    focus: "statistical modelling, machine learning, and data-driven decision support",
+    outcomes: "programming for data, ML pipelines, visualization, and ethics",
     modules: [
-      "Lab safety, QA/QC, and professional practice",
-      "Phlebotomy and specimen procurement",
-      "Hematology, chemistry, and microbiology support procedures",
-      "Instrumentation basics and result verification workflows",
+      "Statistical learning and data wrangling",
+      "Machine learning and model evaluation",
+      "Data engineering / big data electives",
+      "Ethics, privacy, and communication of insights",
     ],
-    clinicalOrCapstone: "Hospital or private lab clinical rotation",
-  },
-  "medical-office-assistant": {
-    focus: "front-desk and clinical admin support in medical offices",
-    outcomes:
-      "patient reception, appointment systems, EHR data entry, and OHIP/provincial billing awareness",
-    modules: [
-      "Medical office communications and customer service",
-      "Scheduling, triage basics, and electronic records",
-      "Billing awareness, forms, and confidentiality",
-      "Clinical assisting support skills where program scope allows",
-    ],
-    clinicalOrCapstone: "Medical office work placement",
-  },
-  paralegal: {
-    focus: "legal services support within the permitted paralegal/scope framework of the province",
-    outcomes:
-      "legal research basics, tribunal procedure awareness, client interviewing, and ethics",
-    modules: [
-      "Canadian legal system and professional responsibility",
-      "Legal research, writing, and citation",
-      "Small claims / tribunal practice foundations",
-      "Evidence, advocacy basics, and practice management",
-    ],
-    clinicalOrCapstone: "Moot, clinic, or law-office field placement",
-  },
-  "pharmacy-assistant": {
-    focus: "pharmacy counter and dispensary support under regulated supervision",
-    outcomes:
-      "customer service, prescription intake, inventory, and pharmacy software workflows",
-    modules: [
-      "Pharmacy workplace roles, ethics, and customer care",
-      "Prescription intake, third-party basics, and product knowledge",
-      "Inventory, compounding support awareness, and accuracy checks",
-      "Communication with pharmacists and interprofessional teams",
-    ],
-    clinicalOrCapstone: "Community pharmacy assistant practicum",
-  },
-  "supply-chain-logistics": {
-    focus: "end-to-end supply chain coordination for goods and services",
-    outcomes:
-      "procurement basics, inventory control, transportation awareness, and ERP literacy",
-    modules: [
-      "Supply chain foundations and Canadian trade context",
-      "Procurement, vendor relations, and cost control",
-      "Warehousing, inventory systems, and transportation modes",
-      "ERP/spreadsheet analytics and continuous improvement",
-    ],
-    clinicalOrCapstone: "Logistics capstone or industry work term",
-  },
-  "community-service-worker": {
-    focus: "frontline social service support across community agencies",
-    outcomes:
-      "intake interviewing, case note writing, crisis referral, and advocacy basics",
-    modules: [
-      "Human services ethics, diversity, and anti-oppressive practice intro",
-      "Counselling micro-skills and group work foundations",
-      "Community resources, housing/poverty awareness, and referrals",
-      "Documentation, self-care, and professional boundaries",
-    ],
-    clinicalOrCapstone: "Community agency field placement",
-  },
-  "dental-administrator": {
-    focus: "dental practice operations, scheduling, and patient financial coordination",
-    outcomes:
-      "dental software, insurance claim support, recall systems, and team coordination",
-    modules: [
-      "Dental office roles, terminology, and customer experience",
-      "Scheduling, recall, and treatment coordination",
-      "Insurance claims, billing support, and privacy",
-      "Inventory, reporting, and practice administration",
-    ],
-    clinicalOrCapstone: "Dental office administrative placement",
-  },
-  "dental-assisting": {
-    focus: "chairside dental assisting for general practice clinics",
-    outcomes:
-      "instrumentation, infection control, patient preparation, and preventive education",
-    modules: [
-      "Oral anatomy, charting, and dental materials",
-      "Chairside procedures and four-handed dentistry",
-      "Sterilization, radiography awareness, and OSHA-style safety culture",
-      "Patient education and practice professionalism",
-    ],
-    clinicalOrCapstone: "Dental assisting clinical practicum",
-  },
-  "early-childhood-assistant": {
-    focus: "assistant-level support in childcare centres and early years programs",
-    outcomes:
-      "routine care, play facilitation support, observation notes, and ratio-aware teamwork",
-    modules: [
-      "Introduction to early years practice and child development",
-      "Supporting play, routines, and positive guidance",
-      "Health, safety, and nutrition in childcare",
-      "Working with RECE/lead educators and families",
-    ],
-    clinicalOrCapstone: "Assistant practicum in a licensed childcare setting",
-  },
-  "fitness-and-health": {
-    focus: "exercise leadership and lifestyle coaching foundations",
-    outcomes:
-      "program design basics, client screening awareness, group fitness leadership, and wellness education",
-    modules: [
-      "Anatomy, physiology, and movement fundamentals",
-      "Client assessment awareness and goal setting",
-      "Resistance training, cardio programming, and group classes",
-      "Nutrition basics, behaviour change, and professional practice",
-    ],
-    clinicalOrCapstone: "Fitness centre practicum or client case portfolio",
-  },
-  "food-service-worker": {
-    focus: "institutional food service in health care and community settings",
-    outcomes:
-      "safe food handling, therapeutic diet awareness, tray service, and kitchen teamwork",
-    modules: [
-      "Food safety, sanitation, and workplace hygiene",
-      "Therapeutic diets and nutrition basics for institutions",
-      "Food production support, portioning, and tray assembly",
-      "Customer service in health care dining and team communication",
-    ],
-    clinicalOrCapstone: "Health care or institutional kitchen placement",
-  },
-  "medical-laboratory-assistant-technician": {
-    focus: "combined MLA/MLT support skills for specimen and bench workflows",
-    outcomes:
-      "phlebotomy, pre-analytical processing, basic analytical support, and lab information systems",
-    modules: [
-      "Lab safety, quality systems, and professionalism",
-      "Phlebotomy and specimen accessioning",
-      "Core lab support across hematology and chemistry",
-      "Instrumentation support and result verification culture",
-    ],
-    clinicalOrCapstone: "Combined laboratory clinical experience",
-  },
-  "medical-office-administrator": {
-    focus: "senior administrative coordination across multi-provider clinics",
-    outcomes:
-      "workflow design, staff scheduling support, compliance tracking, and patient experience leadership",
-    modules: [
-      "Advanced medical office systems and leadership communication",
-      "Multi-provider scheduling and referral coordination",
-      "Privacy, compliance, and quality indicators",
-      "Financial administration awareness and process improvement",
-    ],
-    clinicalOrCapstone: "Clinic operations practicum or process-improvement project",
+    capstone: "Applied data science project with real datasets",
   },
 };
 
 export const PROGRAMS: readonly Program[] = [
   {
-    id: "business-administration",
-    name: "Business Administration",
-    category: "Business & Administration",
-    duration: "Typically 2 years",
-    credential: "Diploma",
-    summary: "Operations, marketing, HR, and leadership foundations for supervisory roles.",
-  },
-  {
-    id: "cardiology-technology",
-    name: "Cardiology Technology",
-    category: "Health & Allied Care",
-    duration: "Typically 2 years",
-    credential: "Diploma",
-    summary: "Cardiac diagnostics support including ECG and ambulatory monitoring.",
-  },
-  {
-    id: "child-youth-care-addiction-support",
-    name: "Child and Youth Care with Addiction Support Worker",
-    category: "Community & Human Services",
-    duration: "Typically 2 years",
-    credential: "Diploma",
-    summary: "Youth-centred support with addiction-aware community practice.",
-  },
-  {
-    id: "information-technology",
-    name: "Information Technology Diploma",
-    category: "Technology",
-    duration: "Typically 2 years",
-    credential: "Diploma",
-    summary: "Networking, systems support, and cybersecurity-ready IT skills.",
-  },
-  {
-    id: "law-enforcement-police-foundations",
-    name: "Law Enforcement / Police Foundations Diploma",
-    category: "Justice & Public Safety",
-    duration: "Typically 2 years",
-    credential: "Diploma",
-    summary: "Justice-system foundations for policing and related public safety paths.",
-  },
-  {
-    id: "medical-office-administration",
-    name: "Medical Office Administration Diploma",
-    category: "Business & Administration",
+    id: "mba",
+    name: "Master of Business Administration (MBA)",
+    category: "Business & Management",
     duration: "Typically 1–2 years",
-    credential: "Diploma",
-    summary: "Clinic leadership, scheduling systems, and medical office operations.",
+    credential: "Master’s degree",
+    summary: "Leadership and management preparation for advancing or pivoting careers.",
   },
   {
-    id: "massage-therapy",
-    name: "Massage Therapy Diploma",
-    category: "Health & Allied Care",
+    id: "master-of-finance",
+    name: "Master of Finance",
+    category: "Business & Management",
+    duration: "Typically 1–2 years",
+    credential: "Master’s degree",
+    summary: "Advanced finance, markets, and investment analysis.",
+  },
+  {
+    id: "graduate-certificate-business",
+    name: "Graduate Certificate in Business",
+    category: "College Graduate Certificates",
+    duration: "Typically 8–12 months",
+    credential: "Graduate certificate (college)",
+    summary: "Post-degree business specialization at a community college.",
+  },
+  {
+    id: "master-of-public-health",
+    name: "Master of Public Health",
+    category: "Health & Social Care",
+    duration: "Typically 1–2 years",
+    credential: "Master’s degree",
+    summary: "Population health, policy, and program evaluation.",
+  },
+  {
+    id: "master-of-nursing",
+    name: "Master of Nursing",
+    category: "Health & Social Care",
+    duration: "Typically 2 years",
+    credential: "Master’s degree",
+    summary: "Advanced nursing practice, leadership, and evidence-informed care.",
+  },
+  {
+    id: "master-of-social-work",
+    name: "Master of Social Work",
+    category: "Health & Social Care",
+    duration: "Typically 1–2 years",
+    credential: "Master’s degree",
+    summary: "Advanced social work practice and field education.",
+  },
+  {
+    id: "graduate-certificate-health",
+    name: "Graduate Certificate in Health",
+    category: "College Graduate Certificates",
+    duration: "Typically 8–12 months",
+    credential: "Graduate certificate (college)",
+    summary: "Post-degree health specialization through a college program.",
+  },
+  {
+    id: "master-of-education",
+    name: "Master of Education",
+    category: "Education & Counselling",
+    duration: "Typically 1–2 years",
+    credential: "Master’s degree",
+    summary: "Advanced study in teaching, learning, and educational leadership.",
+  },
+  {
+    id: "master-of-counselling",
+    name: "Master of Counselling / Counselling Psychology",
+    category: "Education & Counselling",
     duration: "Typically 2–3 years",
-    credential: "Diploma",
-    summary: "Therapeutic assessment and treatment with supervised clinic hours.",
+    credential: "Master’s degree",
+    summary: "Professional counselling preparation with supervised practicum.",
   },
   {
-    id: "orthopaedic-technician",
-    name: "Orthopaedic Technician Diploma",
-    category: "Health & Allied Care",
+    id: "master-of-computer-science",
+    name: "Master of Computer Science",
+    category: "Technology & Engineering",
     duration: "Typically 1–2 years",
-    credential: "Diploma",
-    summary: "Casting, splinting, and orthopaedic clinic technical support.",
+    credential: "Master’s degree",
+    summary: "Advanced computing, systems, and applied research.",
   },
   {
-    id: "personal-support-worker",
-    name: "Personal Support Worker",
-    category: "Health & Allied Care",
-    duration: "Typically under 1 year",
-    credential: "Certificate",
-    summary: "Personal care and daily living support in facility and community settings.",
-  },
-  {
-    id: "pharmacy-technician",
-    name: "Pharmacy Technician Diploma",
-    category: "Health & Allied Care",
-    duration: "Typically 2 years",
-    credential: "Diploma",
-    summary: "Dispensing support and regulated pharmacy operations training.",
-  },
-  {
-    id: "early-childhood-assistant-diploma",
-    name: "Early Childhood Assistant Diploma",
-    category: "Community & Human Services",
+    id: "master-of-data-science",
+    name: "Master of Data Science",
+    category: "Technology & Engineering",
     duration: "Typically 1–2 years",
-    credential: "Diploma",
-    summary: "Diploma-level assisting in licensed early learning environments.",
+    credential: "Master’s degree",
+    summary: "Statistical learning, machine learning, and applied analytics.",
   },
   {
-    id: "early-childhood-education",
-    name: "Early Childhood Education Diploma",
-    category: "Community & Human Services",
-    duration: "Typically 2 years",
-    credential: "Diploma",
-    summary: "Lead educator preparation for curriculum and inclusive early years practice.",
-  },
-  {
-    id: "health-information-management",
-    name: "Health Information Management Diploma",
-    category: "Health & Allied Care",
-    duration: "Typically 2 years",
-    credential: "Diploma",
-    summary: "Clinical data quality, coding awareness, and health records stewardship.",
-  },
-  {
-    id: "dental-assistant-intra-oral",
-    name: "Intra Oral Level 1 & 2 Dental Assistant Diploma",
-    category: "Dental & Clinical Support",
+    id: "master-of-engineering",
+    name: "Master of Engineering",
+    category: "Technology & Engineering",
     duration: "Typically 1–2 years",
-    credential: "Diploma",
-    summary: "Chairside and intra-oral Level 1 & 2 dental assisting competencies.",
+    credential: "Master’s degree",
+    summary: "Advanced engineering practice and technical leadership.",
   },
   {
-    id: "medical-esthetician",
-    name: "Medical Esthetician Diploma",
-    category: "Health & Allied Care",
+    id: "graduate-certificate-it",
+    name: "Graduate Certificate in Information Technology",
+    category: "College Graduate Certificates",
+    duration: "Typically 8–12 months",
+    credential: "Graduate certificate (college)",
+    summary: "Post-degree IT specialization at a community college.",
+  },
+  {
+    id: "master-of-public-administration",
+    name: "Master of Public Administration",
+    category: "Public Policy & Arts",
     duration: "Typically 1–2 years",
-    credential: "Diploma",
-    summary: "Clinical aesthetic treatments in medical-spa environments.",
+    credential: "Master’s degree",
+    summary: "Public sector leadership, policy analysis, and governance.",
   },
   {
-    id: "medical-laboratory-technician",
-    name: "Medical Laboratory Technician Diploma",
-    category: "Health & Allied Care",
-    duration: "Typically 2 years",
-    credential: "Diploma",
-    summary: "Phlebotomy and core laboratory support procedures.",
-  },
-  {
-    id: "medical-office-assistant",
-    name: "Medical Office Assistant",
-    category: "Business & Administration",
-    duration: "Typically under 1 year",
-    credential: "Certificate",
-    summary: "Front-desk medical reception, scheduling, and EHR support.",
-  },
-  {
-    id: "paralegal",
-    name: "Paralegal",
-    category: "Justice & Public Safety",
-    duration: "Typically 2 years",
-    credential: "Diploma",
-    summary: "Legal research, tribunal practice foundations, and ethics.",
-  },
-  {
-    id: "pharmacy-assistant",
-    name: "Pharmacy Assistant",
-    category: "Health & Allied Care",
-    duration: "Typically under 1 year",
-    credential: "Certificate",
-    summary: "Pharmacy counter support, inventory, and dispensary workflows.",
-  },
-  {
-    id: "supply-chain-logistics",
-    name: "Supply Chain and Logistics Diploma",
-    category: "Business & Administration",
-    duration: "Typically 2 years",
-    credential: "Diploma",
-    summary: "Procurement, inventory, transportation, and ERP fundamentals.",
-  },
-  {
-    id: "community-service-worker",
-    name: "Community Service Worker",
-    category: "Community & Human Services",
+    id: "master-of-arts",
+    name: "Master of Arts",
+    category: "Public Policy & Arts",
     duration: "Typically 1–2 years",
-    credential: "Diploma / Certificate",
-    summary: "Frontline social service support and community referral practice.",
+    credential: "Master’s degree",
+    summary: "Advanced humanities or social science research and specialization.",
   },
   {
-    id: "dental-administrator",
-    name: "Dental Administrator",
-    category: "Dental & Clinical Support",
-    duration: "Typically under 1 year",
-    credential: "Certificate",
-    summary: "Dental practice scheduling, insurance support, and operations.",
-  },
-  {
-    id: "dental-assisting",
-    name: "Dental Assisting",
-    category: "Dental & Clinical Support",
-    duration: "Typically 1 year",
-    credential: "Certificate / Diploma",
-    summary: "Chairside assisting, sterilization, and patient education.",
-  },
-  {
-    id: "early-childhood-assistant",
-    name: "Early Childhood Assistant",
-    category: "Community & Human Services",
-    duration: "Typically under 1 year",
-    credential: "Certificate",
-    summary: "Assistant-level support for childcare routines and play facilitation.",
-  },
-  {
-    id: "fitness-and-health",
-    name: "Fitness and Health",
-    category: "Health & Allied Care",
+    id: "master-of-science",
+    name: "Master of Science",
+    category: "Technology & Engineering",
     duration: "Typically 1–2 years",
-    credential: "Diploma / Certificate",
-    summary: "Exercise leadership, program design, and wellness education.",
-  },
-  {
-    id: "food-service-worker",
-    name: "Food Service Worker",
-    category: "Health & Allied Care",
-    duration: "Typically under 1 year",
-    credential: "Certificate",
-    summary: "Institutional food service for health care and community kitchens.",
-  },
-  {
-    id: "medical-laboratory-assistant-technician",
-    name: "Medical Laboratory Assistant / Technician",
-    category: "Health & Allied Care",
-    duration: "Typically 1–2 years",
-    credential: "Certificate / Diploma",
-    summary: "Combined specimen and bench support for clinical laboratories.",
-  },
-  {
-    id: "medical-office-administrator",
-    name: "Medical Office Administrator",
-    category: "Business & Administration",
-    duration: "Typically 1 year",
-    credential: "Certificate / Diploma",
-    summary: "Senior clinic coordination, compliance, and patient experience leadership.",
+    credential: "Master’s degree",
+    summary: "Advanced scientific research and technical specialization.",
   },
 ] as const;
 
@@ -807,19 +524,19 @@ function buildCourseDetails(
 
   return {
     title: `${program.name} — ${province.name}`,
-    description: `Build ${template.focus} through a ${ctx.credentialFraming} designed around ${ctx.regulator}. Coursework emphasizes ${template.outcomes}, with delivery suited to ${ctx.campusNote}. Graduates are prepared for opportunities among ${ctx.labourFocus}. ${province.highlight}`,
+    description: `Explore ${template.focus} through ${ctx.institutionNote}. Typical outcomes include ${template.outcomes}. Eligible Canadian citizens, permanent residents, and refugees/protected persons may apply for support through ${ctx.studentAid}. Graduates often look toward opportunities among ${ctx.labourFocus}. AC Education Consulting can help you compare options and plan funding—we are not affiliated with any college or university.`,
     breakdown: [
-      `Module 1: ${template.modules[0]}`,
-      `Module 2: ${template.modules[1]}`,
-      `Module 3: ${template.modules[2]}`,
-      `Module 4: ${template.modules[3]}`,
-      `Applied learning: ${template.clinicalOrCapstone}`,
-      `Credential: ${program.credential} · ${program.duration} · ${province.name}`,
+      `Coursework focus: ${template.modules[0]}`,
+      `Coursework focus: ${template.modules[1]}`,
+      `Coursework focus: ${template.modules[2]}`,
+      `Coursework focus: ${template.modules[3]}`,
+      `Culminating experience: ${template.capstone}`,
+      `Credential: ${program.credential} · ${program.duration}`,
+      `Student aid to explore: ${province.studentAid}`,
     ],
   };
 }
 
-/** Fully populated directory: every province × every program. */
 export const courseDirectory: Record<
   ProvinceId,
   Record<ProgramId, CourseDetails>
@@ -858,4 +575,3 @@ export function getProgramsByCategory(): Record<ProgramCategory, Program[]> {
 
 export const PROGRAM_COUNT = PROGRAMS.length;
 export const PROVINCE_COUNT = PROVINCES.length;
-export const COMBINATION_COUNT = PROGRAM_COUNT * PROVINCE_COUNT;

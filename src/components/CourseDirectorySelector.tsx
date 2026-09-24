@@ -4,7 +4,6 @@ import { useId, useState } from "react";
 import {
   PROVINCES,
   PROGRAMS,
-  COMBINATION_COUNT,
   getCourseDetails,
   type ProvinceId,
   type ProgramId,
@@ -39,17 +38,18 @@ export default function CourseDirectorySelector() {
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.14em] text-white/50">
-            Course directory
+            Program directory
           </p>
           <h2
             id="course-directory-heading"
             className="mt-3 font-[family-name:var(--font-display)] text-3xl text-white sm:text-4xl"
           >
-            Compare programs by province
+            Compare master’s programs by province
           </h2>
           <p className="mt-3 text-[color:var(--muted)] leading-relaxed">
-            Select a province, then a program, to view description and breakdown
-            tailored to that combination—{COMBINATION_COUNT} pathways mapped.
+            Select a province and a graduate program to see a plain-language
+            overview, typical coursework focus, and the student aid system to
+            explore. Independent advice only—not an official school listing.
           </p>
         </div>
 
@@ -88,7 +88,7 @@ export default function CourseDirectorySelector() {
                   htmlFor={programSelectId}
                   className="text-sm font-medium text-white"
                 >
-                  Program
+                  Master’s / graduate program
                 </label>
                 <select
                   id={programSelectId}

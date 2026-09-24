@@ -18,11 +18,11 @@ export default function ProcessSection() {
               id="process-heading"
               className="mt-3 font-[family-name:var(--font-display)] text-3xl text-white sm:text-4xl"
             >
-              A clear four-stage journey
+              How we work with you
             </h2>
             <p className="mt-3 text-[color:var(--muted)] leading-relaxed">
-              Structured guidance from first conversation to your first week on
-              campus.
+              From first consult to career support after you successfully
+              complete your program.
             </p>
 
             <ol className="mt-10 grid gap-8 sm:grid-cols-2">
@@ -45,7 +45,7 @@ export default function ProcessSection() {
           <div className="relative aspect-[4/5] overflow-hidden rounded-lg sm:aspect-[5/4] lg:aspect-[4/5]">
             <Image
               src="/images/application-desk.jpg"
-              alt="Student reviewing application documents at a desk"
+              alt="Student reviewing application and funding documents at a desk"
               fill
               sizes="(max-width: 1024px) 100vw, 45vw"
               className="object-cover"

@@ -3,14 +3,15 @@ import {
   PROVINCES,
   type ProgramCategory,
 } from "@/lib/courseData";
+import { site } from "@/lib/siteContent";
 
 const categoryOrder: ProgramCategory[] = [
-  "Health & Allied Care",
-  "Business & Administration",
-  "Community & Human Services",
-  "Dental & Clinical Support",
-  "Technology",
-  "Justice & Public Safety",
+  "Business & Management",
+  "Health & Social Care",
+  "Education & Counselling",
+  "Technology & Engineering",
+  "Public Policy & Arts",
+  "College Graduate Certificates",
 ];
 
 export default function ProgramsSection() {
@@ -31,11 +32,11 @@ export default function ProgramsSection() {
             id="programs-heading"
             className="mt-3 font-[family-name:var(--font-display)] text-3xl sm:text-4xl"
           >
-            Career-focused diplomas and certificates we advise on
+            Master’s and graduate-level study at colleges and universities
           </h2>
           <p className="mt-3 text-white/65 leading-relaxed">
-            Browse fields of study below, then use the directory to compare how
-            each program is framed across Canadian provinces.
+            We advise on master’s degrees and college graduate certificates
+            across Canada. {site.disclaimer}
           </p>
         </div>
 
@@ -66,8 +67,12 @@ export default function ProgramsSection() {
 
         <div className="mt-16 border-t border-white/15 pt-12">
           <h3 className="font-[family-name:var(--font-display)] text-2xl sm:text-3xl">
-            Ten provinces. Distinct opportunity landscapes.
+            Study across Canada’s provinces
           </h3>
+          <p className="mt-2 max-w-2xl text-sm text-white/55">
+            Compare graduate options where you live—and the student aid system
+            that typically applies.
+          </p>
           <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
             {PROVINCES.map((province) => (
               <li key={province.id}>

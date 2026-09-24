@@ -1,10 +1,5 @@
 import Image from "next/image";
-import { services, whyCanada } from "@/lib/siteContent";
-import {
-  COMBINATION_COUNT,
-  PROGRAM_COUNT,
-  PROVINCE_COUNT,
-} from "@/lib/courseData";
+import { services, site, whoWeServe } from "@/lib/siteContent";
 
 export default function ServicesSection() {
   return (
@@ -17,13 +12,13 @@ export default function ServicesSection() {
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-12 lg:gap-14 lg:px-8 lg:py-24">
           <div className="lg:col-span-5">
             <p className="text-sm font-semibold uppercase tracking-[0.14em] text-white/50">
-              Why AC Education
+              Who we serve
             </p>
             <h2
               id="about-heading"
               className="mt-3 font-[family-name:var(--font-display)] text-3xl leading-tight text-white sm:text-4xl"
             >
-              Education consulting built around Canadian college pathways
+              Built for people already building a life in Canada
             </h2>
             <div className="relative mt-8 aspect-[4/3] overflow-hidden rounded-lg lg:mt-10">
               <Image
@@ -37,37 +32,25 @@ export default function ServicesSection() {
           </div>
           <div className="lg:col-span-7">
             <p className="text-lg leading-relaxed text-[color:var(--muted)]">
-              AC Education Consulting helps students and sponsors make clear
-              study choices in Canada—selecting the right diploma or certificate,
-              in the right province, with application and arrival support that
-              stays with you beyond the offer letter.
+              AC Education Consulting helps Canadian citizens, permanent
+              residents, and refugees choose the right master’s or graduate-level
+              program at a community college or university—then navigate
+              government grants and student loans, and plan careers after
+              successfully completing the course.
             </p>
-            <dl className="mt-10 grid grid-cols-3 gap-4 sm:gap-6">
-              <div>
-                <dt className="text-xs uppercase tracking-wide text-white/45">
-                  Provinces
-                </dt>
-                <dd className="mt-1 font-[family-name:var(--font-display)] text-3xl text-white sm:text-4xl">
-                  {PROVINCE_COUNT}
-                </dd>
-              </div>
-              <div>
-                <dt className="text-xs uppercase tracking-wide text-white/45">
-                  Programs
-                </dt>
-                <dd className="mt-1 font-[family-name:var(--font-display)] text-3xl text-white sm:text-4xl">
-                  {PROGRAM_COUNT}
-                </dd>
-              </div>
-              <div>
-                <dt className="text-xs uppercase tracking-wide text-white/45">
-                  Pathways
-                </dt>
-                <dd className="mt-1 font-[family-name:var(--font-display)] text-3xl text-white sm:text-4xl">
-                  {COMBINATION_COUNT}
-                </dd>
-              </div>
-            </dl>
+            <p className="mt-4 text-sm leading-relaxed text-white/45">
+              {site.disclaimer}
+            </p>
+            <ul className="mt-10 space-y-6">
+              {whoWeServe.map((item) => (
+                <li key={item.title} className="border-t border-[color:var(--line)] pt-5">
+                  <h3 className="text-lg font-semibold text-white">{item.title}</h3>
+                  <p className="mt-2 text-[15px] leading-relaxed text-[color:var(--muted)]">
+                    {item.description}
+                  </p>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
@@ -86,15 +69,15 @@ export default function ServicesSection() {
               id="services-heading"
               className="mt-3 font-[family-name:var(--font-display)] text-3xl text-white sm:text-4xl"
             >
-              Support from first shortlist to campus arrival
+              From the right program to funding—and a career after you pass
             </h2>
             <p className="mt-3 text-[color:var(--muted)] leading-relaxed">
-              One partner for matching, applications, permits, housing, and
-              ongoing mentorship.
+              No visa assistance. No overseas recruitment. Focused support for
+              domestic and eligible refugee clients in Canada.
             </p>
           </div>
 
-          <ul className="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2">
             {services.map((service) => (
               <li key={service.title}>
                 <h3 className="text-lg font-semibold text-white">
@@ -102,33 +85,6 @@ export default function ServicesSection() {
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-[color:var(--muted)] sm:text-[15px]">
                   {service.description}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section
-        className="border-y border-[color:var(--line)] bg-[color:var(--bg)]"
-        aria-labelledby="why-canada-heading"
-      >
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
-          <h2
-            id="why-canada-heading"
-            className="font-[family-name:var(--font-display)] text-3xl text-white sm:text-4xl"
-          >
-            Why study in Canada
-          </h2>
-          <ul className="mt-10 grid gap-8 md:grid-cols-3">
-            {whyCanada.map((item) => (
-              <li
-                key={item.title}
-                className="border-t border-[color:var(--line)] pt-5"
-              >
-                <h3 className="text-lg font-semibold text-white">{item.title}</h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-[color:var(--muted)]">
-                  {item.description}
                 </p>
               </li>
             ))}

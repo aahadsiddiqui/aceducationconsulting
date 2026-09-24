@@ -20,11 +20,16 @@ export default function ContactSection() {
             id="contact-heading"
             className="mt-3 font-[family-name:var(--font-display)] text-3xl sm:text-4xl"
           >
-            Start your Canadian college plan
+            Let’s plan your next credential
           </h2>
           <p className="mt-4 max-w-md text-white/65 leading-relaxed">
-            Tell us where you are in the journey. We’ll follow up with next steps
-            for program matching and application timelines.
+            Tell us whether you’re a citizen, permanent resident, or
+            refugee/protected person—and what master’s or graduate program you’re
+            considering. We’ll follow up about schools, funding, and career
+            support.
+          </p>
+          <p className="mt-4 max-w-md text-sm text-white/40 leading-relaxed">
+            {site.disclaimer}
           </p>
           <dl className="mt-8 space-y-3 text-sm">
             <div>
@@ -50,7 +55,7 @@ export default function ContactSection() {
               </dd>
             </div>
             <div>
-              <dt className="text-white/40">Coverage</dt>
+              <dt className="text-white/40">Who we serve</dt>
               <dd className="text-white/75">{site.location}</dd>
             </div>
           </dl>
@@ -92,6 +97,25 @@ export default function ContactSection() {
             </div>
           </div>
           <div className="flex flex-col gap-1.5">
+            <label htmlFor="contact-status" className="text-sm text-white/65">
+              Status in Canada
+            </label>
+            <select
+              id="contact-status"
+              name="status"
+              required
+              className="cursor-pointer appearance-none rounded-md border border-white/20 bg-white/5 px-3.5 py-2.5 text-white transition hover:border-white/35 focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/20"
+              defaultValue=""
+            >
+              <option value="" disabled>
+                Select…
+              </option>
+              <option value="citizen">Canadian citizen</option>
+              <option value="pr">Permanent resident</option>
+              <option value="refugee">Refugee / protected person</option>
+            </select>
+          </div>
+          <div className="flex flex-col gap-1.5">
             <label htmlFor="contact-interest" className="text-sm text-white/65">
               Program interest
             </label>
@@ -99,7 +123,7 @@ export default function ContactSection() {
               id="contact-interest"
               name="interest"
               className="rounded-md border border-white/20 bg-white/5 px-3.5 py-2.5 text-white placeholder:text-white/35 transition hover:border-white/35 focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/20"
-              placeholder="e.g. Business Administration in Ontario"
+              placeholder="e.g. MBA in Ontario, funding through OSAP"
             />
           </div>
           <div className="flex flex-col gap-1.5">
@@ -112,7 +136,7 @@ export default function ContactSection() {
               rows={4}
               required
               className="resize-y rounded-md border border-white/20 bg-white/5 px-3.5 py-2.5 text-white placeholder:text-white/35 transition hover:border-white/35 focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/20"
-              placeholder="Share your timeline, preferred province, or questions…"
+              placeholder="Share your goals, province, or funding questions…"
             />
           </div>
           <button

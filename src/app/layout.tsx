@@ -15,9 +15,9 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "AC Education Consulting | Canadian College Pathways",
+  title: "AC Education Consulting | Master’s Programs & Student Funding",
   description:
-    "Education consulting for Canadian college diplomas and certificates—program matching by province, applications, study permits, and arrival support.",
+    "Independent guidance for Canadian citizens, permanent residents, and refugees pursuing master’s programs—plus OSAP/provincial student aid help and career support after graduation. Not affiliated with any college or university.",
 };
 
 export default function RootLayout({
