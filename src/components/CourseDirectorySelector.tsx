@@ -44,10 +44,10 @@ export default function CourseDirectorySelector() {
             id="course-directory-heading"
             className="mt-3 font-[family-name:var(--font-display)] text-3xl text-white sm:text-4xl"
           >
-            Compare master’s programs by province
+            Compare career-focused college programs by province
           </h2>
           <p className="mt-3 text-[color:var(--muted)] leading-relaxed">
-            Select a province and a graduate program to see a plain-language
+            Select a province and a college program to see a plain-language
             overview, typical coursework focus, and the student aid system to
             explore. Independent advice only—not an official school listing.
           </p>
@@ -88,7 +88,7 @@ export default function CourseDirectorySelector() {
                   htmlFor={programSelectId}
                   className="text-sm font-medium text-white"
                 >
-                  Master’s / graduate program
+                  College program
                 </label>
                 <select
                   id={programSelectId}

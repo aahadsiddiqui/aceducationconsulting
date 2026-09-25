@@ -20,10 +20,8 @@ export default function FundingSection() {
             Grants and loans through OSAP and provincial student aid
           </h2>
           <p className="mt-3 text-[color:var(--muted)] leading-relaxed">
-            We help eligible citizens, permanent residents, and refugees
-            understand the government funding available for master’s and
-            graduate-level study—and how to apply through the right student
-            assistance system.
+            We help eligible Ontario residents understand OSAP and apply for
+            funding that can support career-focused college programs.
           </p>
         </div>
 

@@ -1,7 +1,8 @@
 export const site = {
   name: "AC Education Consulting",
-  tagline: "Master’s programs, government funding, and career support",
+  tagline: "Career-focused college programs, OSAP guidance, and student support",
   email: "agnescamalla@aceductationconsulting.com",
+  formEndpoint: "https://formspree.io/f/mdekdynn",
   phone: "416-809-1298",
   location: "Serving Canadian citizens, permanent residents, and refugees across Canada",
   disclaimer:
@@ -22,12 +23,12 @@ export const whoWeServe = [
   {
     title: "Canadian citizens",
     description:
-      "Domestic applicants looking for the right master’s or graduate-level program and the funding that can support it.",
+      "Ontario residents looking for a career-focused college program and the funding that can support it.",
   },
   {
     title: "Permanent residents",
     description:
-      "PR holders ready to advance with a master’s degree or graduate credential at a Canadian college or university.",
+      "PR holders ready to start a career-focused program at an accredited private college in Ontario.",
   },
   {
     title: "Refugees & protected persons",
@@ -38,9 +39,9 @@ export const whoWeServe = [
 
 export const services = [
   {
-    title: "Right college & university fit",
+    title: "Right college fit",
     description:
-      "We help you compare master’s and graduate-level options at community colleges and universities—based on your goals, background, and where you live. We are not affiliated with any institution.",
+      "We help you compare career-focused programs at accredited private colleges in Ontario—based on your goals, background, and schedule.",
   },
   {
     title: "Government grants & student loans",
@@ -50,7 +51,7 @@ export const services = [
   {
     title: "Application guidance",
     description:
-      "We help organize transcripts, references, statements, and timelines so your applications to colleges and universities are complete and competitive.",
+      "We help organize transcripts, references, statements, and timelines so your college applications are complete and competitive.",
   },
   {
     title: "Career support after graduation",
@@ -60,6 +61,16 @@ export const services = [
 ] as const;
 
 export const fundingHighlights = [
+  {
+    title: "OSAP Application Assistance",
+    description:
+      "Step-by-step support to help eligible students apply correctly and avoid funding delays.",
+  },
+  {
+    title: "Career & Program Consultation",
+    description:
+      "Personalized guidance to align your education choice with your career goals and schedule.",
+  },
   {
     title: "OSAP (Ontario)",
     description:
@@ -93,7 +104,7 @@ export const processSteps = [
     step: "02",
     title: "Program shortlist",
     description:
-      "We shortlist master’s and graduate-level programs at colleges and universities that fit you—without institutional affiliation or pressure toward a single school.",
+      "We shortlist career-focused college programs that fit your goals, abilities, and schedule.",
   },
   {
     step: "03",
@@ -112,13 +123,13 @@ export const processSteps = [
 export const testimonials = [
   {
     quote:
-      "As a permanent resident, I needed a master’s option I could fund through OSAP. AC Education helped me compare programs and submit a clearer aid application.",
+      "As a permanent resident, I needed a college program I could fund through OSAP. AC Education helped me compare options and submit a clearer aid application.",
     name: "Amara O.",
     detail: "Permanent resident · Ontario",
   },
   {
     quote:
-      "They explained Alberta Student Aid in plain language and helped me choose a graduate program that matched the career I wanted after finishing.",
+      "They explained Alberta Student Aid in plain language and helped me choose a college program that matched the career I wanted after finishing.",
     name: "Daniel K.",
     detail: "Canadian citizen · Alberta",
   },
@@ -137,9 +148,9 @@ export const faqs = [
       "We work with Canadian citizens, permanent residents, and refugees/protected persons. We do not provide overseas recruitment, study-permit, or visa assistance.",
   },
   {
-    question: "Do you only advise on master’s programs?",
+    question: "Do you advise on master’s programs?",
     answer:
-      "Yes. We focus on master’s and graduate-level programs offered through Canadian community colleges and universities. We are not affiliated with those institutions.",
+      "No. We focus on career-focused programs at accredited private colleges in Ontario. We do not advise on master’s degrees.",
   },
   {
     question: "Can you guarantee OSAP or provincial funding?",

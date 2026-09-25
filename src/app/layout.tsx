@@ -15,9 +15,9 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "AC Education Consulting | Master’s Programs & Student Funding",
+  title: "AC Education Consulting | College Programs & OSAP Funding",
   description:
-    "Independent guidance for Canadian citizens, permanent residents, and refugees pursuing master’s programs—plus OSAP/provincial student aid help and career support after graduation. Not affiliated with any college or university.",
+    "Helping Ontario residents access career-focused college programs and available funding—with no upfront consultation fees.",
 };
 
 export default function RootLayout({

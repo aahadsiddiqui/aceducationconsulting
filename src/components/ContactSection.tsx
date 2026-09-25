@@ -1,6 +1,35 @@
+"use client";
+
+import { useState } from "react";
 import { site } from "@/lib/siteContent";
 
 export default function ContactSection() {
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    setStatus("submitting");
+
+    try {
+      const response = await fetch(site.formEndpoint, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
+
+      if (response.ok) {
+        form.reset();
+        setStatus("success");
+        return;
+      }
+
+      setStatus("error");
+    } catch {
+      setStatus("error");
+    }
+  }
+
   return (
     <section
       id="contact"
@@ -23,10 +52,9 @@ export default function ContactSection() {
             Let’s plan your next credential
           </h2>
           <p className="mt-4 max-w-md text-white/65 leading-relaxed">
-            Tell us whether you’re a citizen, permanent resident, or
-            refugee/protected person—and what master’s or graduate program you’re
-            considering. We’ll follow up about schools, funding, and career
-            support.
+            Tell us about your goals and the career-focused college program
+            you’re considering. We’ll follow up about admissions, OSAP funding,
+            and next steps. There are no upfront consultation fees.
           </p>
           <p className="mt-4 max-w-md text-sm text-white/40 leading-relaxed">
             {site.disclaimer}
@@ -63,10 +91,18 @@ export default function ContactSection() {
 
         <form
           className="space-y-4"
-          action={`mailto:${site.email}`}
-          method="post"
-          encType="text/plain"
+          action={site.formEndpoint}
+          method="POST"
+          onSubmit={handleSubmit}
         >
+          <input
+            type="text"
+            name="_gotcha"
+            tabIndex={-1}
+            autoComplete="off"
+            className="hidden"
+            aria-hidden
+          />
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="flex flex-col gap-1.5">
               <label htmlFor="contact-name" className="text-sm text-white/65">
@@ -110,9 +146,9 @@ export default function ContactSection() {
               <option value="" disabled>
                 Select…
               </option>
-              <option value="citizen">Canadian citizen</option>
-              <option value="pr">Permanent resident</option>
-              <option value="refugee">Refugee / protected person</option>
+              <option value="Canadian citizen">Canadian citizen</option>
+              <option value="Permanent resident">Permanent resident</option>
+              <option value="Refugee / protected person">Refugee / protected person</option>
             </select>
           </div>
           <div className="flex flex-col gap-1.5">
@@ -123,7 +159,7 @@ export default function ContactSection() {
               id="contact-interest"
               name="interest"
               className="rounded-md border border-white/20 bg-white/5 px-3.5 py-2.5 text-white placeholder:text-white/35 transition hover:border-white/35 focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/20"
-              placeholder="e.g. MBA in Ontario, funding through OSAP"
+              placeholder="e.g. business diploma in Ontario, funding through OSAP"
             />
           </div>
           <div className="flex flex-col gap-1.5">
@@ -141,10 +177,27 @@ export default function ContactSection() {
           </div>
           <button
             type="submit"
-            className="w-full rounded-md bg-white px-5 py-3 text-sm font-semibold text-black transition hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 sm:w-auto"
+            disabled={status === "submitting"}
+            className="w-full rounded-md bg-white px-5 py-3 text-sm font-semibold text-black transition hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 disabled:cursor-wait disabled:opacity-70 sm:w-auto"
           >
-            Send message
+            {status === "submitting" ? "Sending…" : "Send message"}
           </button>
+          <p className="min-h-5 text-sm" aria-live="polite">
+            {status === "success" && (
+              <span className="text-white/80">
+                Thanks. Your message is on its way, and we&apos;ll follow up soon.
+              </span>
+            )}
+            {status === "error" && (
+              <span className="text-white/80">
+                We couldn&apos;t send that just now. Try again, or email{" "}
+                <a href={`mailto:${site.email}`} className="underline underline-offset-4">
+                  {site.email}
+                </a>
+                .
+              </span>
+            )}
+          </p>
         </form>
       </div>
     </section>

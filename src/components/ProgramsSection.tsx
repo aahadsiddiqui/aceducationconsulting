@@ -11,7 +11,7 @@ const categoryOrder: ProgramCategory[] = [
   "Education & Counselling",
   "Technology & Engineering",
   "Public Policy & Arts",
-  "College Graduate Certificates",
+  "Career-focused programs",
 ];
 
 export default function ProgramsSection() {
@@ -32,16 +32,18 @@ export default function ProgramsSection() {
             id="programs-heading"
             className="mt-3 font-[family-name:var(--font-display)] text-3xl sm:text-4xl"
           >
-            Master’s and graduate-level study at colleges and universities
+            Career-focused programs at private colleges
           </h2>
           <p className="mt-3 text-white/65 leading-relaxed">
-            We advise on master’s degrees and college graduate certificates
-            across Canada. {site.disclaimer}
+            We advise on career-focused college programs—not master’s degrees.{" "}
+            {site.disclaimer}
           </p>
         </div>
 
         <div className="mt-14 space-y-12">
-          {categoryOrder.map((category) => (
+          {categoryOrder
+            .filter((category) => (byCategory[category]?.length ?? 0) > 0)
+            .map((category) => (
             <div key={category}>
               <h3 className="border-b border-white/15 pb-3 text-sm font-semibold uppercase tracking-[0.12em] text-white/50">
                 {category}
@@ -70,8 +72,8 @@ export default function ProgramsSection() {
             Study across Canada’s provinces
           </h3>
           <p className="mt-2 max-w-2xl text-sm text-white/55">
-            Compare graduate options where you live—and the student aid system
-            that typically applies.
+            Compare career-focused college options where you live—and the student
+            aid system that typically applies.
           </p>
           <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
             {PROVINCES.map((province) => (

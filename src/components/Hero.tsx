@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { site } from "@/lib/siteContent";
 
 export default function Hero() {
   return (
@@ -28,16 +27,22 @@ export default function Hero() {
       </div>
 
       <div className="relative mx-auto flex min-h-dvh max-w-6xl flex-col justify-end px-4 pb-16 pt-28 sm:px-6 sm:pb-20 lg:px-8 lg:pb-24">
-        <p
+        <h1
           id="hero-brand"
           className="font-[family-name:var(--font-display)] text-4xl leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl animate-rise"
         >
-          {site.name}
+          <span className="block">Get into College.</span>
+          <span className="block">Get Funded.</span>
+          <span className="block">Get Ahead.</span>
+        </h1>
+        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/90 sm:text-xl animate-rise-delay">
+          Welcome to AC Education Consulting! We provide expert guidance to
+          help you navigate education and achieve your goals through tailored
+          consulting. Let&apos;s unlock your potential together!
         </p>
-        <p className="mt-5 max-w-xl text-lg text-white/85 sm:text-xl animate-rise-delay">
-          Independent guidance for Canadian citizens, permanent residents, and
-          refugees pursuing master’s programs—plus help with government student
-          funding and careers after graduation.
+        <p className="mt-4 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg animate-rise-delay">
+          Helping Ontario residents access career-focused programs and available
+          funding—with no upfront consultation fees.
         </p>
         <div className="mt-8 flex flex-wrap gap-3 animate-rise-delay-2">
           <a
