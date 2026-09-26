@@ -74,7 +74,7 @@ export default function ServicesSection() {
 
       <section
         id="services"
-        className="bg-[color:var(--bg-elevated)]"
+        className="scroll-mt-24 bg-[color:var(--bg-elevated)]"
         aria-labelledby="services-heading"
       >
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
@@ -94,9 +94,12 @@ export default function ServicesSection() {
             </p>
           </div>
 
-          <ul className="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2">
+          <ul className="mt-10 grid gap-4 sm:grid-cols-2">
             {services.map((service) => (
-              <li key={service.title}>
+              <li
+                key={service.title}
+                className="rounded-xl border border-white/10 bg-black/20 p-5"
+              >
                 <h3 className="text-lg font-semibold text-white">
                   {service.title}
                 </h3>

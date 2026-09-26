@@ -150,7 +150,7 @@ export const faqs = [
   {
     question: "Do you advise on master’s programs?",
     answer:
-      "No. We focus on career-focused programs at accredited private colleges in Ontario. We do not advise on master’s degrees.",
+      "No. We advise on diploma and certificate programs in the private-college sector across Canada. We do not advise on master’s degrees.",
   },
   {
     question: "Can you guarantee OSAP or provincial funding?",

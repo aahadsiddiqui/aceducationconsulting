@@ -35,7 +35,7 @@ export default function SocialProofSection() {
 
       <section
         id="faq"
-        className="border-t border-[color:var(--line)] bg-[color:var(--bg-elevated)]"
+        className="scroll-mt-24 border-t border-[color:var(--line)] bg-[color:var(--bg-elevated)]"
         aria-labelledby="faq-heading"
       >
         <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
@@ -48,7 +48,7 @@ export default function SocialProofSection() {
           <div className="mt-10 divide-y divide-[color:var(--line)]">
             {faqs.map((faq) => (
               <details key={faq.question} className="group py-5">
-                <summary className="flex cursor-pointer list-none items-start justify-between gap-4 rounded-sm font-semibold text-white outline-none marker:content-none focus-visible:ring-2 focus-visible:ring-white/30">
+                <summary className="flex min-h-12 cursor-pointer list-none items-start justify-between gap-4 rounded-sm py-1 font-semibold text-white outline-none marker:content-none focus-visible:ring-2 focus-visible:ring-white/30">
                   <span>{faq.question}</span>
                   <span
                     aria-hidden

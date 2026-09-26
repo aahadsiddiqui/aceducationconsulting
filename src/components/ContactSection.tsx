@@ -1,10 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { site } from "@/lib/siteContent";
+import { INTEREST_EVENT } from "@/lib/directorySelection";
 
 export default function ContactSection() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const interestRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    function onInterest(event: Event) {
+      const value = (event as CustomEvent<string>).detail;
+      if (!interestRef.current || !value) return;
+      interestRef.current.value = value;
+      window.setTimeout(() => {
+        interestRef.current?.focus({ preventScroll: true });
+      }, 400);
+    }
+
+    window.addEventListener(INTEREST_EVENT, onInterest);
+    return () => window.removeEventListener(INTEREST_EVENT, onInterest);
+  }, []);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -33,7 +49,7 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden border-t border-[color:var(--line)] bg-[color:var(--bg)] text-white"
+      className="scroll-mt-24 relative overflow-hidden border-t border-[color:var(--line)] bg-[color:var(--bg)] text-white"
       aria-labelledby="contact-heading"
     >
       <div
@@ -113,7 +129,7 @@ export default function ContactSection() {
                 name="name"
                 required
                 autoComplete="name"
-                className="rounded-md border border-white/20 bg-white/5 px-3.5 py-2.5 text-white placeholder:text-white/35 transition hover:border-white/35 focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/20"
+                className="min-h-12 rounded-md border border-white/20 bg-white/5 px-3.5 py-2.5 text-base text-white placeholder:text-white/35 transition hover:border-white/35 focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/20"
                 placeholder="Your name"
               />
             </div>
@@ -127,7 +143,7 @@ export default function ContactSection() {
                 type="email"
                 required
                 autoComplete="email"
-                className="rounded-md border border-white/20 bg-white/5 px-3.5 py-2.5 text-white placeholder:text-white/35 transition hover:border-white/35 focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/20"
+                className="min-h-12 rounded-md border border-white/20 bg-white/5 px-3.5 py-2.5 text-base text-white placeholder:text-white/35 transition hover:border-white/35 focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/20"
                 placeholder="you@email.com"
               />
             </div>
@@ -140,7 +156,7 @@ export default function ContactSection() {
               id="contact-status"
               name="status"
               required
-              className="cursor-pointer appearance-none rounded-md border border-white/20 bg-white/5 px-3.5 py-2.5 text-white transition hover:border-white/35 focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/20"
+              className="field-select min-h-12 cursor-pointer appearance-none rounded-md border border-white/20 bg-white/5 px-3.5 py-2.5 text-base text-white transition hover:border-white/35 focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/20"
               defaultValue=""
             >
               <option value="" disabled>
@@ -158,7 +174,8 @@ export default function ContactSection() {
             <input
               id="contact-interest"
               name="interest"
-              className="rounded-md border border-white/20 bg-white/5 px-3.5 py-2.5 text-white placeholder:text-white/35 transition hover:border-white/35 focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/20"
+              ref={interestRef}
+              className="min-h-12 rounded-md border border-white/20 bg-white/5 px-3.5 py-2.5 text-base text-white placeholder:text-white/35 transition hover:border-white/35 focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/20"
               placeholder="e.g. business diploma in Ontario, funding through OSAP"
             />
           </div>
@@ -171,14 +188,14 @@ export default function ContactSection() {
               name="message"
               rows={4}
               required
-              className="resize-y rounded-md border border-white/20 bg-white/5 px-3.5 py-2.5 text-white placeholder:text-white/35 transition hover:border-white/35 focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/20"
+              className="min-h-28 resize-y rounded-md border border-white/20 bg-white/5 px-3.5 py-2.5 text-base text-white placeholder:text-white/35 transition hover:border-white/35 focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/20"
               placeholder="Share your goals, province, or funding questions…"
             />
           </div>
           <button
             type="submit"
             disabled={status === "submitting"}
-            className="w-full rounded-md bg-white px-5 py-3 text-sm font-semibold text-black transition hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 disabled:cursor-wait disabled:opacity-70 sm:w-auto"
+            className="inline-flex min-h-12 w-full items-center justify-center rounded-md bg-white px-5 py-3 text-sm font-semibold text-black transition hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 disabled:cursor-wait disabled:opacity-70 sm:w-auto"
           >
             {status === "submitting" ? "Sending…" : "Send message"}
           </button>
